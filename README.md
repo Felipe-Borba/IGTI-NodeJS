@@ -18,3 +18,7 @@ $npm init
 ## Lesson 1.6.1
 
 * Show different kind of module, how to export and the differences.
+
+## Lesson 1.6.2
+
+* Show different ways to write a file and how use async functions.
