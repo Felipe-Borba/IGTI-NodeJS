@@ -29,4 +29,8 @@ $npm init
 
 ## Lesson 1.6.4
 
-* Talk a lithe about 'readline' library.
+* Talk a little about 'readline' library.
+
+## Lesson 1.6.5
+
+* Introduction of 'events' lib-module.
