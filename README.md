@@ -26,3 +26,7 @@ $npm init
 ## Lesson 1.6.3
 
 * How to write and read a json file.
+
+## Lesson 1.6.4
+
+* Talk a lithe about 'readline' library.
