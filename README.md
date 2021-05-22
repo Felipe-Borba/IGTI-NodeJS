@@ -33,4 +33,28 @@ $npm init
 
 ## Lesson 1.6.5
 
-* Introduction of 'events' lib-module.
+* Introduction of 'events' module.
+
+## Lesson 1.6.6
+
+* HTTP native module.
+* How to use nodemon.
+
+```bash
+$npm install --save-dev nodemon
+```
+
+in my case I prefer install nodemon locally as dev dependency. So in order to run nodemon, add in package.json:
+
+```json
+"scripts": {
+    ...
+    "start": "nodemon ./1-6-6"
+  },
+```
+
+and run with:
+
+```bash
+$npm start
+```
