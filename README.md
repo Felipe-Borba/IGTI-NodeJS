@@ -22,3 +22,7 @@ $npm init
 ## Lesson 1.6.2
 
 * Show different ways to write a file and how use async functions.
+
+## Lesson 1.6.3
+
+* How to write and read a json file.
