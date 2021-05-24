@@ -71,6 +71,6 @@ $npm i express
   
   Stop the server if It's running locally and simply use the start button in debug tab, don't forget to check the launch.json file (if exists).
 
-## Lesson 2.2.1 ~ 2.2.2
+## Lesson 2.2.1 ~ 2.2.3
 
-* different ways to configure route.
+* different ways to configure route and send params.

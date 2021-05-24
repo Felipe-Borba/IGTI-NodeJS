@@ -36,9 +36,38 @@ app.post('/body?', (req, res) => {
     res.send(`body logged`);
 });
 
-app.get('/param/:id/:name?', (req, res)=>{
+app.get('/param/:id/:name?', (req, res) => {
     res.send(`send with variable called \'id\' and \'name\' in route, but \'name\' is optional \n ${req.params.id}, ${req.params.name}`);
 });
+
+//query params
+app.get('/query/', (req, res) => {
+    res.send(`response of query: \n${JSON.stringify(req.query)}`);
+});
+
+//next
+app.get('/next', (req, res, next) => {
+    console.log('callback 1');
+    next();
+}, (req, res) => {
+    console.log('callback 2');
+    res.end();
+});
+
+const callback1 = (req, res, next) => {
+    console.log('callback 1');
+    next();
+};
+function callback2(req, res, next) {
+    console.log('callback 2');
+    res.end();
+    next();
+};
+const callback3 = (req, res, next) => {
+    console.log('callback 3');
+};
+app.get('/arrayNext', [callback1, callback2, callback3]);
+
 
 app.listen(3000, () => {
     console.log('API Started!');
