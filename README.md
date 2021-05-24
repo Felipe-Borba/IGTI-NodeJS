@@ -78,3 +78,7 @@ $npm i express
 ## Lesson 2.3
 
 * How to use the router functionality of express framework.
+
+## Lesson 2.4
+
+* Error handling.
