@@ -82,3 +82,11 @@ $npm i express
 ## Lesson 2.4
 
 * Error handling.
+
+## Lesson 2.5
+
+* How to log using Winston lib.
+
+```bash
+$npm i winston
+```
