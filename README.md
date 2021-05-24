@@ -58,3 +58,15 @@ and run with:
 ```bash
 $npm start
 ```
+
+## Lesson 2.1
+
+* Install express
+
+```bash
+$npm i express
+```
+
+* How to debug:
+  
+  Stop the server if It's running locally and simply use the start button in debug tab, don't forget to check the launch.json file (if exists).
