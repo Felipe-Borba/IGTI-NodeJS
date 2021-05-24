@@ -68,7 +68,16 @@ const callback3 = (req, res, next) => {
 };
 app.get('/arrayNext', [callback1, callback2, callback3]);
 
+//route
+app.route('/route')
+    .get((req, res) => {
+        res.send(`works only with route get and post: ${req.method}`);
+    })
+    .post((req, res) => {
+        res.send(`works only with route post and get: ${req.method}`);
+    });
 
+    
 app.listen(3000, () => {
     console.log('API Started!');
 });
