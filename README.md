@@ -74,3 +74,7 @@ $npm i express
 ## Lesson 2.2.1 ~ 2.2.4
 
 * different ways to configure route and send params.
+
+## Lesson 2.3
+
+* How to use the router functionality of express framework.
