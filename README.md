@@ -90,3 +90,7 @@ $npm i express
 ```bash
 $npm i winston
 ```
+
+## Lesson 2.6
+
+* Serving static files.
