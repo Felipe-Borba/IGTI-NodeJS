@@ -9,7 +9,7 @@ router.get('/maisModelos', async (req, res) => {
         res.send(data);
     } catch (error) {
         console.log(error);
-        res.status(404).send('Sorry, cant find that');
+        res.status(500).send('Sorry, something went wrong');
     }
 });
 
@@ -19,13 +19,13 @@ router.get('/menosModelos', async (req, res) => {
         res.send(data);
     } catch (error) {
         console.log(error);
-        res.status(404).send('Sorry, cant find that');
+        res.status(500).send('Sorry, something went wrong');
     }
 });
 
 router.get('/listaMaisModelos/:X', async (req, res) => {
-    const filter = req.params.X;
     try {
+        const filter = req.params.X;
         const data = await ReadJson('increasing');
         const dataFiltered = data.filter(item => item.models.length >= filter);
         const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
@@ -33,13 +33,13 @@ router.get('/listaMaisModelos/:X', async (req, res) => {
         res.send(dataMapped);
     } catch (error) {
         console.log(error);
-        res.status(404).send('Sorry, cant find that');
+        res.status(500).send('Sorry, something went wrong');
     }
 });
 
 router.get('/listaMenosModelos/:X', async (req, res) => {
-    const filter = req.params.X;
     try {
+        const filter = req.params.X;
         const data = await ReadJson('decreasing');
         const dataFiltered = data.filter(item => item.models.length <= filter);
         const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
@@ -47,14 +47,25 @@ router.get('/listaMenosModelos/:X', async (req, res) => {
         res.send(dataMapped);
     } catch (error) {
         console.log(error);
-        res.status(404).send('Sorry, cant find that');
+        res.status(500).send('Sorry, something went wrong');
     }
 });
 
 router.post('/listaModelos', async (req, res) => {
-    const brandName = req.body.nomeMarca;
-    // TODO to be implemented
+    try {
+        const brandName = req.body.nomeMarca.toLowerCase().capitalize();
+        const data = JSON.parse(await fs.readFile('asset/car-list.json'));
+        const findData = data.find(item => item.brand == brandName);
+        res.send(findData ? findData.models : []);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Sorry, something went wrong');
+    }
 });
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
 async function getModelsFiltered(moreLess) {
 
