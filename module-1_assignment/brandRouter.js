@@ -28,9 +28,7 @@ router.get('/listaMaisModelos/:X', async (req, res) => {
     try {
         const data = await ReadJson('increasing');
         const dataFiltered = data.filter(item => item.models.length >= filter);
-        const dataMapped = dataFiltered.map(item => {
-            return `Marca ${item.brand} - ${item.models.length}`
-        });
+        const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
 
         res.send(dataMapped);
     } catch (error) {
@@ -39,12 +37,21 @@ router.get('/listaMaisModelos/:X', async (req, res) => {
     }
 });
 
-router.get('/listaMenosModelos/:X', (req, res) => {
+router.get('/listaMenosModelos/:X', async (req, res) => {
     const filter = req.params.X;
-    // TODO to be implemented
+    try {
+        const data = await ReadJson('decreasing');
+        const dataFiltered = data.filter(item => item.models.length <= filter);
+        const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
+
+        res.send(dataMapped);
+    } catch (error) {
+        console.log(error);
+        res.status(404).send('Sorry, cant find that');
+    }
 });
 
-router.post('/listaModelos', (req, res) => {
+router.post('/listaModelos', async (req, res) => {
     const brandName = req.body.nomeMarca;
     // TODO to be implemented
 });
