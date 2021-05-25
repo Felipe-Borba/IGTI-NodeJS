@@ -26,11 +26,9 @@ router.get('/menosModelos', async (req, res) => {
 router.get('/listaMaisModelos/:X', async (req, res) => {
     try {
         const filter = req.params.X;
-        const data = await ReadJson('increasing');
-        const dataFiltered = data.filter((item, n) => n <= filter - 1);
-        const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
+        const data = await listBrands(filter, 'increasing');
 
-        res.send(dataMapped);
+        res.send(data);
     } catch (error) {
         console.log(error);
         res.status(500).send('Sorry, something went wrong');
@@ -40,11 +38,9 @@ router.get('/listaMaisModelos/:X', async (req, res) => {
 router.get('/listaMenosModelos/:X', async (req, res) => {
     try {
         const filter = req.params.X;
-        const data = await ReadJson('decreasing');
-        const dataFiltered = data.filter((item, n) => n <= filter - 1);
-        const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
+        const data = await listBrands(filter, 'decreasing');
 
-        res.send(dataMapped);
+        res.send(data);
     } catch (error) {
         console.log(error);
         res.status(500).send('Sorry, something went wrong');
@@ -66,6 +62,13 @@ router.post('/listaModelos', async (req, res) => {
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+async function listBrands(filter, sort) {
+    const data = await ReadJson(sort);
+    const dataFiltered = data.filter((item, n) => n <= filter - 1);
+    const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
+    return dataMapped;
 }
 
 async function getModelsFiltered(moreLess) {
