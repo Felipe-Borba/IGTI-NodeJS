@@ -27,7 +27,7 @@ router.get('/listaMaisModelos/:X', async (req, res) => {
     try {
         const filter = req.params.X;
         const data = await ReadJson('increasing');
-        const dataFiltered = data.filter(item => item.models.length >= filter);
+        const dataFiltered = data.filter((item, n) => n <= filter - 1);
         const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
 
         res.send(dataMapped);
@@ -41,7 +41,7 @@ router.get('/listaMenosModelos/:X', async (req, res) => {
     try {
         const filter = req.params.X;
         const data = await ReadJson('decreasing');
-        const dataFiltered = data.filter(item => item.models.length <= filter);
+        const dataFiltered = data.filter((item, n) => n <= filter - 1);
         const dataMapped = dataFiltered.map(item => `Marca ${item.brand} - ${item.models.length}`);
 
         res.send(dataMapped);
@@ -56,7 +56,7 @@ router.post('/listaModelos', async (req, res) => {
         const brandName = req.body.nomeMarca.toLowerCase().capitalize();
         const data = JSON.parse(await fs.readFile('asset/car-list.json'));
         const findData = data.find(item => item.brand == brandName);
-        
+
         res.send(findData ? findData.models : []);
     } catch (error) {
         console.log(error);
@@ -64,7 +64,7 @@ router.post('/listaModelos', async (req, res) => {
     }
 });
 
-String.prototype.capitalize = function() {
+String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
@@ -92,8 +92,10 @@ async function ReadJson(order) {
     }
 
     data.sort((a, b) => {
-        if (a.models.length == b.models.length)
+        if (a.models.length == b.models.length){
+           //TODO filter in alphabetic order casa length is equal 
             return 0;
+        } 
         if (a.models.length < b.models.length)
             return (filter);
         if (a.models.length > b.models.length)
