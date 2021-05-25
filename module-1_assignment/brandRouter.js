@@ -56,6 +56,7 @@ router.post('/listaModelos', async (req, res) => {
         const brandName = req.body.nomeMarca.toLowerCase().capitalize();
         const data = JSON.parse(await fs.readFile('asset/car-list.json'));
         const findData = data.find(item => item.brand == brandName);
+        
         res.send(findData ? findData.models : []);
     } catch (error) {
         console.log(error);
