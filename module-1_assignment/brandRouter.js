@@ -92,10 +92,12 @@ async function ReadJson(order) {
     }
 
     data.sort((a, b) => {
-        if (a.models.length == b.models.length){
-           //TODO filter in alphabetic order casa length is equal 
-            return 0;
-        } 
+        if (a.models.length == b.models.length) {
+            if (a.brand > b.brand)
+                return 1;
+            else
+                return -1;
+        }
         if (a.models.length < b.models.length)
             return (filter);
         if (a.models.length > b.models.length)
