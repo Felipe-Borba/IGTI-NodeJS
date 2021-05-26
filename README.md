@@ -103,3 +103,8 @@ $npm i winston
 
 * Create a project folder and setup.
 * Add nodemon custom config file to ignore changes in json files
+
+## Lesson 3.3
+
+* Create post route
+* How to write in json file formatted
