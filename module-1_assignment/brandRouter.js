@@ -1,64 +1,62 @@
 import express from 'express';
 import { promises as fs } from "fs";
 
+const { readFile } = fs;
 const router = express.Router();
 
-router.get('/maisModelos', async (req, res) => {
+//! In this case should have some performance improvement if implemented using only one for loop
+router.get('/maisModelos', async (req, res, next) => {
     try {
         const data = await getModelsFiltered('increasing');
-        res.send(data);
+        res.send(data); //TODO case data have only one item should not return an array with one element (possible fix: using ternary)
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, something went wrong');
+        next(error);
     }
 });
 
-router.get('/menosModelos', async (req, res) => {
+router.get('/menosModelos', async (req, res, next) => {
     try {
         const data = await getModelsFiltered('decreasing');
         res.send(data);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, something went wrong');
+        next(error);
     }
 });
 
-router.get('/listaMaisModelos/:X', async (req, res) => {
+router.get('/listaMaisModelos/:X', async (req, res, next) => {
     try {
         const filter = req.params.X;
         const data = await listBrands(filter, 'increasing');
 
         res.send(data);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, something went wrong');
+        next(error);
     }
 });
 
-router.get('/listaMenosModelos/:X', async (req, res) => {
+router.get('/listaMenosModelos/:X', async (req, res, next) => {
     try {
         const filter = req.params.X;
         const data = await listBrands(filter, 'decreasing');
 
         res.send(data);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, something went wrong');
+        next(error);
     }
 });
 
-router.post('/listaModelos', async (req, res) => {
+//* It's possible to get rid of capitalize function by setting everything to uppercase inside find function
+router.post('/listaModelos', async (req, res, next) => {
     try {
         const brandName = req.body.nomeMarca.toLowerCase().capitalize();
-        const data = JSON.parse(await fs.readFile('asset/car-list.json'));
+        const data = JSON.parse(await readFile('asset/car-list.json'));
         const findData = data.find(item => item.brand == brandName);
-
         res.send(findData ? findData.models : []);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Sorry, something went wrong');
+        next(error);
     }
 });
+
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -85,7 +83,7 @@ async function getModelsFiltered(moreLess) {
 
 async function ReadJson(order) {
     let filter = 0;
-    const data = JSON.parse(await fs.readFile('asset/car-list.json'));
+    const data = JSON.parse(await readFile('asset/car-list.json'));
 
     if (order === 'increasing') {
         filter = 1;
@@ -96,15 +94,14 @@ async function ReadJson(order) {
 
     data.sort((a, b) => {
         if (a.models.length == b.models.length) {
-            if (a.brand > b.brand)
-                return 1;
-            else
-                return -1;
+            return a.brand.localeCompare(b.brand);
         }
-        if (a.models.length < b.models.length)
+        if (a.models.length < b.models.length) {
             return (filter);
-        if (a.models.length > b.models.length)
+        }
+        if (a.models.length > b.models.length) {
             return ((-1) * filter);
+        }
     });
     return data;
 }

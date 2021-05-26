@@ -6,6 +6,9 @@ app.use(express.json());
 
 app.use('/marcas', brandRouter);
 
-app.listen(8080, () => {
-    console.log('Server Started!');
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.status(500).send('Sorry, something went wrong');
 });
+
+app.listen(8080, () => console.log('Server Started!'));
