@@ -118,3 +118,7 @@ $npm i winston
 ## Lesson 3.5
 
 * Create get by id route
+
+## Lesson 3.6
+
+* Create delete route

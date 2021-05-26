@@ -2,11 +2,6 @@
   "nextId": 5,
   "accounts": [
     {
-      "name": "Hummer",
-      "balance": 200,
-      "id": 1
-    },
-    {
       "id": 2,
       "name": "felipe",
       "balance": 2003
