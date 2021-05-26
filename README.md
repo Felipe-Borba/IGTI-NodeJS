@@ -94,3 +94,12 @@ $npm i winston
 ## Lesson 2.6
 
 * Serving static files.
+
+## Lesson 3.1
+
+* Project explanation
+
+## Lesson 3.2
+
+* Create a project folder and setup.
+* Add nodemon custom config file to ignore changes in json files
