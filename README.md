@@ -108,3 +108,9 @@ $npm i winston
 
 * Create post route
 * How to write in json file formatted
+
+## Lesson 3.4
+
+* Create get route
+* Define global variable
+* Delete operator

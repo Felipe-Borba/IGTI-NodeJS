@@ -8,11 +8,11 @@ const router = express.Router();
 router.post(`/`, async (req, res) => {
     try {
         let account = req.body;
-        const data = JSON.parse(await readFile(`accounts.json`));
+        const data = JSON.parse(await readFile(global.fileName));
 
         account = { id: data.nextId++, ...account };
         data.accounts.push(account);
-        await writeFile(`accounts.json`, JSON.stringify(data, null, 2));
+        await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
         res.send(account);
     } catch (error) {
@@ -20,5 +20,18 @@ router.post(`/`, async (req, res) => {
         res.status(500).send('Sorry, something went wrong');
     }
 });
+
+router.get(`/`, async (req, res) => {
+    try {
+        const data = JSON.parse(await readFile(global.fileName));
+        delete data.nextId;
+
+        res.send(data);
+    } catch (error) {
+        console.log(err);
+        res.status(500).send('Sorry, something went wrong');
+    }
+});
+
 
 export default router;
