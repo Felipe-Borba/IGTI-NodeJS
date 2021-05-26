@@ -114,3 +114,7 @@ $npm i winston
 * Create get route
 * Define global variable
 * Delete operator
+
+## Lesson 3.5
+
+* Create get by id route
