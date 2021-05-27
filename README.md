@@ -138,3 +138,27 @@ $npm i winston
 ## Lesson 3.10
 
 * verify some input data fields
+
+## Lesson DBJ 3.11
+
+* How to use a library called Cors to manage CORS
+
+To enable all routes
+
+```javascript
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+...
+```
+
+To enable a single route
+
+```javascript
+router.get(`/`, cors(), (req, res) => {
+    ...
+});
+```

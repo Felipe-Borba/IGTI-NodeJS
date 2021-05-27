@@ -2,6 +2,7 @@ import express from 'express';
 import accountRouter from './routes/accounts.js';
 import { promises } from 'fs';
 import winston from 'winston';
+import cors from 'cors';
 
 const { readFile, writeFile } = promises;
 
@@ -27,7 +28,9 @@ global.logger = winston.createLogger({
 
 const app = express();
 app.use(express.json());
+//app.use(cors());  // All routes enabled
 app.use(`/account`, accountRouter);
+app.use(express.static(`public`));
 
 app.listen(8080, async () => {
     try {
