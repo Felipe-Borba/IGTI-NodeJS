@@ -176,3 +176,7 @@ $npm i swagger-ui-express
 ## Lesson DBJ 4.1
 
 * explanation how to organize your project
+
+## Lesson DBJ 4.2.1
+
+* Refactor post route to Controller

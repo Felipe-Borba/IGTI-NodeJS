@@ -2,35 +2,13 @@ import { error } from 'console';
 import express from 'express';
 import { promises } from 'fs';
 import cors from 'cors';
+import AccountController from '../controllers/account.controller.js';
 
 const { readFile, writeFile } = promises;
 
 const router = express.Router();
 
-router.post(`/`, async (req, res, next) => {
-    try {
-        let account = req.body;
-
-        if (!account.name || !account.balance == null) {
-            throw new Error(`name and balance are required`);
-        }
-
-        const data = JSON.parse(await readFile(global.fileName));
-
-        account = {
-            id: data.nextId++,
-            name: account.name,
-            balance: account.balance
-        };
-        data.accounts.push(account);
-        await writeFile(global.fileName, JSON.stringify(data, null, 2));
-
-        res.send(account);
-        logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
-    } catch (error) {
-        next(error);
-    }
-});
+router.post(`/`, AccountController.createAccount);
 
 router.get(`/`, cors(), async (req, res, next) => {
     try {
@@ -103,7 +81,7 @@ router.patch(`/updateBalance`, async (req, res, next) => {
     try {
         const account = req.body;
 
-        if (!account.id ||!account.balance == null) {
+        if (!account.id || !account.balance == null) {
             throw new Error(`id and balance are required`);
         }
 
