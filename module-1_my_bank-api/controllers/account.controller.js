@@ -1,5 +1,5 @@
 import { promises } from 'fs';
-
+import accountService from '../services/account.service.js';
 
 const { readFile, writeFile } = promises;
 
@@ -12,15 +12,7 @@ async function createAccount(req, res, next) {
             throw new Error(`name and balance are required`);
         }
 
-        const data = JSON.parse(await readFile(global.fileName));
-
-        account = {
-            id: data.nextId++,
-            name: account.name,
-            balance: account.balance
-        };
-        data.accounts.push(account);
-        await writeFile(global.fileName, JSON.stringify(data, null, 2));
+        account = await accountService.createAccount(account);
 
         res.send(account);
         logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
