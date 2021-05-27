@@ -1,3 +1,4 @@
+import { error } from 'console';
 import express from 'express';
 import { promises } from 'fs';
 
@@ -8,9 +9,18 @@ const router = express.Router();
 router.post(`/`, async (req, res, next) => {
     try {
         let account = req.body;
+
+        if (!account.name || !account.balance == null) {
+            throw new Error(`name and balance are required`);
+        }
+
         const data = JSON.parse(await readFile(global.fileName));
 
-        account = { id: data.nextId++, ...account };
+        account = {
+            id: data.nextId++,
+            name: account.name,
+            balance: account.balance
+        };
         data.accounts.push(account);
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
@@ -62,10 +72,22 @@ router.delete(`/:id`, async (req, res, next) => {
 router.put(`/`, async (req, res, next) => {
     try {
         const account = req.body;
+
+        if (!account.id || !account.name || !account.balance == null) {
+            throw new Error(`id, name and balance are required`);
+        }
+
         let data = JSON.parse(await readFile(global.fileName));
         const index = data.accounts.findIndex(item => item.id == account.id);
 
-        data.accounts[index] = account;
+        if (index === -1) {
+            throw new error(`account not found`);
+        }
+
+        data.accounts[index] = {
+            name: account.name,
+            balance: account.balance
+        };
 
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
@@ -79,8 +101,18 @@ router.put(`/`, async (req, res, next) => {
 router.patch(`/updateBalance`, async (req, res, next) => {
     try {
         const account = req.body;
+
+        if (!account.id ||!account.balance == null) {
+            throw new Error(`id and balance are required`);
+        }
+
         let data = JSON.parse(await readFile(global.fileName));
         const index = data.accounts.findIndex(item => item.id == account.id);
+
+        if (index === -1) {
+            throw new error(`account not found`);
+        }
+
         data.accounts[index].balance = account.balance;
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
@@ -93,7 +125,8 @@ router.patch(`/updateBalance`, async (req, res, next) => {
 
 router.use((error, req, res, next) => {
     logger.error(`${req.method} ${req.originalUrl} - ${error}`);
-    res.status(500).send('Sorry, something went wrong');
+    res.status(400).send(`error: ${error.message}`);
+    //res.status(500).send('Sorry, something went wrong');
 });
 
 export default router;

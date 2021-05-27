@@ -134,3 +134,7 @@ $npm i winston
 ## Lesson 3.9
 
 * saving custom log using winston
+
+## Lesson 3.10
+
+* verify some input data fields
