@@ -19,11 +19,11 @@ app.listen(8080, async () => {
             nextId: 1,
             accounts: []
         };
-        writeFile(global.fileName, JSON.stringify(initialJson)).then(() => {
+        writeFile(global.fileName, JSON.stringify(initialJson, null, 2)).then(() => {
             console.log(`Json file created`);
         }).catch((err) => {
             console.log(err);
         });
     }
-    console.log(`Api Started`);
+    console.log(`Api Started on port: 8080`);
 });

@@ -122,3 +122,7 @@ $npm i winston
 ## Lesson 3.6
 
 * Create delete route
+
+## Lesson 3.7
+
+* Create put and patch route
