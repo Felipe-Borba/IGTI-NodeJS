@@ -126,3 +126,7 @@ $npm i winston
 ## Lesson 3.7
 
 * Create put and patch route
+
+## Lesson 3.8
+
+* error handling
