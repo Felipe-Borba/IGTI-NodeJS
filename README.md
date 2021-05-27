@@ -187,4 +187,8 @@ $npm i swagger-ui-express
 
 ## Lesson DBJ 4.3.1
 
-* Start refactor to Services
+* Start refactor to services
+
+## Lesson DBJ 4.3.2
+
+* Finish refactor to services
