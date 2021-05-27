@@ -172,3 +172,7 @@ To install
 ```bash
 $npm i swagger-ui-express
 ```
+
+## Lesson DBJ 4.1
+
+* explanation how to organize your project
