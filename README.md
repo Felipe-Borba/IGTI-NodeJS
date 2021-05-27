@@ -130,3 +130,7 @@ $npm i winston
 ## Lesson 3.8
 
 * error handling
+
+## Lesson 3.9
+
+* saving custom log using winston

@@ -15,6 +15,7 @@ router.post(`/`, async (req, res, next) => {
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
         res.send(account);
+        logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
     } catch (error) {
         next(error);
     }
@@ -26,6 +27,7 @@ router.get(`/`, async (req, res, next) => {
         delete data.nextId;
 
         res.send(data);
+        logger.info(`${req.method} ${req.originalUrl}`);
     } catch (error) {
         next(error);
     }
@@ -37,6 +39,7 @@ router.get(`/:id`, async (req, res, next) => {
         const account = data.accounts.find(account => account.id == req.params.id);
 
         res.send(account);
+        logger.info(`${req.method} ${req.originalUrl}`);
     } catch (error) {
         next(error);
     }
@@ -50,6 +53,7 @@ router.delete(`/:id`, async (req, res, next) => {
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
         res.end();
+        logger.info(`${req.method} ${req.originalUrl}`);
     } catch (error) {
         next(error);
     }
@@ -66,6 +70,7 @@ router.put(`/`, async (req, res, next) => {
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
         res.send(account);
+        logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
     } catch (error) {
         next(error);
     }
@@ -80,13 +85,14 @@ router.patch(`/updateBalance`, async (req, res, next) => {
         await writeFile(global.fileName, JSON.stringify(data, null, 2));
 
         res.send(data.accounts[index]);
+        logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
     } catch (error) {
         next(error);
     }
 });
 
 router.use((error, req, res, next) => {
-    console.log(error);
+    logger.error(`${req.method} ${req.originalUrl} - ${error}`);
     res.status(500).send('Sorry, something went wrong');
 });
 
