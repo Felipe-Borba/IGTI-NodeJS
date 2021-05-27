@@ -162,3 +162,13 @@ router.get(`/`, cors(), (req, res) => {
     ...
 });
 ```
+
+## Lesson DBJ 3.12
+
+* Api documentation tool: [Swagger](https://swagger.io/tools/swagger-editor/)
+
+To install
+
+```bash
+$npm i swagger-ui-express
+```
