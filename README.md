@@ -224,3 +224,7 @@ $npm i swagger-ui-express
 ## Lesson 5.2.4
 
 * refactor graphql
+
+## Lesson 5.2.5
+
+* finalize refactor

@@ -1,4 +1,4 @@
-import { GraphQLFloat, GraphQLInt, GraphQLObjectType as GraphQLInputObjectType, GraphQLString } from "graphql";
+import { GraphQLFloat, GraphQLInt, GraphQLInputObjectType, GraphQLString } from "graphql";
 
 const AccountInput = new GraphQLInputObjectType({
     name: "AccountInput",
