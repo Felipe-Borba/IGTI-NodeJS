@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLInt } from "graphql";
-import accountService from "../../services/account.service.js";
+import accountResolver from "../resolvers/account.resolver.js";
 import Account from "../type/Account.js";
 import AccountInput from "../type/AccountInput.js";
 
@@ -14,7 +14,7 @@ const accountMutation = {
             }
         },
         resolve(_, args) {
-            return accountService.createAccount(args.account);
+            return accountResolver.createAccount(args.account);
         }
     },   
     deleteAccount: {
@@ -26,7 +26,7 @@ const accountMutation = {
             }
         },
         resolve(_, args) {
-            return accountService.deleteAccount(args.id);
+            return accountResolver.deleteAccount(args.id);
         }
     },
     updateAccount: {
@@ -38,7 +38,7 @@ const accountMutation = {
             }
         },
         resolve(_, args) {
-            return accountService.updateAccount(args.account);
+            return accountResolver.updateAccount(args.account);
         }
     }
 };

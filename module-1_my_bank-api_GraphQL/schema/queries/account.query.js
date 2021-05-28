@@ -1,12 +1,12 @@
 import { GraphQLInt, GraphQLList } from "graphql";
-import accountService from "../../services/account.service.js";
+import accountResolver from "../resolvers/account.resolver.js";
 import Account from '../type/Account.js'
 
 
 const accountQuery = {
     getAccounts: {
         type: new GraphQLList(Account),
-        resolve: () => accountService.getAccounts()
+        resolve: () => accountResolver.getAccounts()
     },
     getAccount: {
         type: Account,
@@ -16,7 +16,7 @@ const accountQuery = {
                 type: GraphQLInt
             }
         },
-        resolve: (_, args) => accountService.getAccount(args.id)
+        resolve: (_, args) => accountResolver.getAccount(args.id)
     }
 };
 
