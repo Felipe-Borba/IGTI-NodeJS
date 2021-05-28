@@ -8,7 +8,7 @@ import { swaggerDocument } from './documentation.js';
 import { buildSchema } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
 import accountService from './services/account.service.js';
-
+import Schema from './schema/index.js' 
 
 const { readFile, writeFile } = promises;
 
@@ -31,6 +31,7 @@ global.logger = winston.createLogger({
     )
 });
 
+/*
 const schema = buildSchema(`
     type Account {
         id: Int
@@ -68,6 +69,7 @@ const root = {
         return accountService.updateAccount(account);
     }
 }
+//*/
 
 const app = express();
 app.use(express.json());
@@ -76,8 +78,8 @@ app.use(`/account`, accountRouter);
 app.use(`/doc`, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.static(`public`));
 app.use(`/graphql`, graphqlHTTP({
-    schema,
-    rootValue: root,
+    schema: Schema,
+    //rootValue: root,
     graphiql: true
 }));
 

@@ -220,3 +220,7 @@ $npm i swagger-ui-express
 ## Lesson 5.2.3
 
 * Mutations
+
+## Lesson 5.2.4
+
+* refactor graphql
