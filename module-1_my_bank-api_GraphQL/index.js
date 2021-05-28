@@ -7,6 +7,8 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerDocument } from './documentation.js';
 import { buildSchema } from 'graphql';
 import { graphqlHTTP } from 'express-graphql';
+import accountService from './services/account.service.js';
+
 
 const { readFile, writeFile } = promises;
 
@@ -42,6 +44,13 @@ const schema = buildSchema(`
 
 `);
 
+const root = {
+    getAccounts: () => accountService.getAccounts(),
+    getAccount(args) {
+        return accountService.getAccount(args.id)
+    }
+}
+
 const app = express();
 app.use(express.json());
 //app.use(cors());  // All routes enabled
@@ -50,7 +59,7 @@ app.use(`/doc`, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.static(`public`));
 app.use(`/graphql`, graphqlHTTP({
     schema,
-    rootValue: null,
+    rootValue: root,
     graphiql: true
 }));
 

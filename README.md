@@ -212,3 +212,7 @@ $npm i swagger-ui-express
 ## Lesson 5.2.1
 
 * Installation of graphQl and initial setup
+
+## Lesson 5.2.2
+
+* resolvers and quick explanation how to use GraphiQL
