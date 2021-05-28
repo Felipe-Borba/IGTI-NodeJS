@@ -215,4 +215,8 @@ $npm i swagger-ui-express
 
 ## Lesson 5.2.2
 
-* resolvers and quick explanation how to use GraphiQL
+* Resolvers and quick explanation how to use GraphiQL
+
+## Lesson 5.2.3
+
+* Mutations

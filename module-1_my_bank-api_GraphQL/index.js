@@ -37,17 +37,35 @@ const schema = buildSchema(`
         name: String
         balance: Float
     }
+    input AccountInput {
+        id: Int
+        name: String
+        balance: Float
+    }
     type Query {
         getAccounts: [Account]
         getAccount(id: Int): Account
     }
-
+    type Mutation {
+        createAccount(account: AccountInput): Account
+        deleteAccount(id: Int): Boolean
+        updateAccount(account: AccountInput): Account    
+    }
 `);
 
 const root = {
     getAccounts: () => accountService.getAccounts(),
     getAccount(args) {
-        return accountService.getAccount(args.id)
+        return accountService.getAccount(args.id);
+    },
+    createAccount({account}) {
+        return accountService.createAccount(account);
+    },
+    deleteAccount(args) {
+        return accountService.deleteAccount(args.id);
+    },
+    updateAccount({account}) {
+        return accountService.updateAccount(account);
     }
 }
 
