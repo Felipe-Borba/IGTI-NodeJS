@@ -204,3 +204,7 @@ $npm i swagger-ui-express
   * Controller: Validate input data, call the service and send response back
   * Service: Have all business rules and call repository when have to deal with database
   * Repository: Deal with CRUD stuff in database
+
+## Lesson 5.1
+
+* Graph QL overall explanation
