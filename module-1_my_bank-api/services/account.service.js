@@ -1,37 +1,22 @@
+import accountRepository from '../repositories/account.repository.js'
 import { promises } from 'fs';
 
 const { readFile, writeFile } = promises;
 
 async function createAccount(account) {
-    const data = JSON.parse(await readFile(global.fileName));
-
-    account = {
-        id: data.nextId++,
-        name: account.name,
-        balance: account.balance
-    };
-    data.accounts.push(account);
-    await writeFile(global.fileName, JSON.stringify(data, null, 2));
-
-    return account;
+    return await accountRepository.insertAccount(account);
 }
 
 async function getAccounts() {
-    const data = JSON.parse(await readFile(global.fileName));
-    delete data.nextId;
-    return data;
+    return await accountRepository.getAccounts();
 }
 
 async function getAccount(id) {
-    const data = JSON.parse(await readFile(global.fileName));
-    return data.accounts.find(account => account.id == parseInt(id));
+    return await accountRepository.getAccount(id);
 }
 
 async function deleteAccount(id) {
-    let data = JSON.parse(await readFile(global.fileName));
-    data.accounts = data.accounts.filter(account => account.id != id);
-
-    await writeFile(global.fileName, JSON.stringify(data, null, 2));
+    return await accountRepository.deleteAccount(id);
 }
 
 async function updateAccount(account) {
