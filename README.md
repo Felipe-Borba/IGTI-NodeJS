@@ -196,3 +196,11 @@ $npm i swagger-ui-express
 ## Lesson DBJ 4.4.1
 
 * Start repository
+
+## Lesson 4.4.2
+
+* Finishing project organization:
+  * Router: Handle requisitions to the controllers
+  * Controller: Validate input data, call the service and send response back
+  * Service: Have all business rules and call repository when have to deal with database
+  * Repository: Deal with CRUD stuff in database

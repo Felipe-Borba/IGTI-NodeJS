@@ -70,7 +70,7 @@ async function updateBalance(req, res, next) {
             throw new Error(`id and balance are required`);
         }
 
-        res.send(accountService.updateBalance(account));
+        res.send(await accountService.updateBalance(account));
 
         logger.info(`${req.method} ${req.originalUrl} - ${JSON.stringify(account)}`);
     } catch (error) {
