@@ -3,24 +3,39 @@ import { promises } from 'fs';
 const { readFile, writeFile } = promises;
 const fileName = `asset/pedidos.json`;
 
-async function insertOrder(order) {
+async function insertItem(item) {
     const data = JSON.parse(await readFile(fileName));
 
-    order = {
+    item = {
         id: data.nextId++,
-        cliente: order.cliente,
-        produto: order.produto,
-        valor: order.valor,
-        entregue: order.entregue,
-        timestamp: order.timestamp
+        ...item
     };
-    data.pedidos.push(order);
+    data.pedidos.push(item);
 
     await writeFile(fileName, JSON.stringify(data, null, 2));
 
-    return order;
+    return item;
+}
+
+async function updateItem(item) {
+    const data = JSON.parse(await readFile(fileName));
+    const index = data.pedidos.findIndex(obj => obj.id == item.id);
+
+    if (index === -1) {
+        throw new Error(`order not found`);
+    }
+
+    data.pedidos[index].cliente = item.cliente;
+    data.pedidos[index].produto = item.produto;
+    data.pedidos[index].valor = item.valor;
+    data.pedidos[index].entregue = item.entregue;
+
+    await writeFile(fileName, JSON.stringify(data, null, 2));
+
+    return data.pedidos[index];
 }
 
 export default {
-    insertOrder
+    insertItem,
+    updateItem
 }
