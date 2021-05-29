@@ -6,6 +6,7 @@ const orderRouter = express.Router();
 
 orderRouter.post('/', orderController.createOrder);
 orderRouter.put('/', orderController.updateOrder);
+orderRouter.patch('/', orderController.updateOrderStatus);
 
 orderRouter.use((error, req, res, next) => {
     console.log(error);

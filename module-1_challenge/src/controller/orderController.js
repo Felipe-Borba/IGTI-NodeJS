@@ -75,6 +75,34 @@ async function updateOrder(req, res, next) {
     }
 }
 
+async function updateOrderStatus(req, res, next) {
+    try {
+        const inputData = {
+            id: req.body.id,
+            entregue: req.body.entregue,
+        };
+
+        if (typeof (inputData.id) != 'number' ||
+            typeof (inputData.entregue) != 'boolean') {
+            throw new Error(`
+                input data should be:
+                {
+                    id: Number,
+                    entregue: Boolean
+                }
+            `);
+        }
+
+
+        await orderService.updateStatus(inputData);
+
+
+        res.end();
+    } catch (error) {
+        next(error);
+    }
+}
+
 // TODO template
 async function name(req, res, next) {
     try {
@@ -86,5 +114,6 @@ async function name(req, res, next) {
 
 export default {
     createOrder,
-    updateOrder
+    updateOrder,
+    updateOrderStatus
 }

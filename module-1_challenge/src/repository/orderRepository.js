@@ -35,7 +35,23 @@ async function updateItem(item) {
     return data.pedidos[index];
 }
 
+async function updateEntregue(params) {
+    const data = JSON.parse(await readFile(fileName));
+    const index = data.pedidos.findIndex(obj => obj.id == params.id);
+
+    if (index === -1) {
+        throw new Error(`order not found`);
+    }
+    
+    data.pedidos[index].entregue = params.entregue;
+
+    await writeFile(fileName, JSON.stringify(data, null, 2));
+
+    return data.pedidos[index];
+}
+
 export default {
     insertItem,
-    updateItem
+    updateItem,
+    updateEntregue
 }

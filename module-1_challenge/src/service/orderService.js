@@ -16,7 +16,12 @@ async function updateOrder(data) {
     return await orderRepository.updateItem(data);
 }
 
+async function updateStatus(params) {
+    return await orderRepository.updateEntregue(params);
+}
+
 export default {
     createOrder,
-    updateOrder
+    updateOrder,
+    updateStatus
 }
