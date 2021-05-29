@@ -50,8 +50,15 @@ async function updateEntregue(params) {
     return data.pedidos[index];
 }
 
+async function deleteOrder(id) {
+    const data = JSON.parse(await readFile(fileName));
+    data.pedidos = data.pedidos.filter(obj => obj.id != id);
+    await writeFile(fileName, JSON.stringify(data, null, 2));
+}
+
 export default {
     insertItem,
     updateItem,
-    updateEntregue
+    updateEntregue,
+    deleteOrder
 }

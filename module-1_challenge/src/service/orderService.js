@@ -20,8 +20,13 @@ async function updateStatus(params) {
     return await orderRepository.updateEntregue(params);
 }
 
+async function deleteOrder(params) {
+    return await orderRepository.deleteOrder(params.id);
+}
+
 export default {
     createOrder,
     updateOrder,
-    updateStatus
+    updateStatus,
+    deleteOrder
 }

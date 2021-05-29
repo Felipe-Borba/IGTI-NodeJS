@@ -103,17 +103,41 @@ async function updateOrderStatus(req, res, next) {
     }
 }
 
+async function deleteOrder(req, res, next) {
+    try {
+        const inputData = {
+            id: req.body.id
+        };
+
+        if (typeof (inputData.id) != 'number' ) {
+            throw new Error(`
+                input data should be:
+                {
+                    id: Number
+                }
+            `);
+        }
+        
+        await orderService.deleteOrder(inputData);
+
+        res.end();
+    } catch (error) {
+        next(error);
+    }
+}
+
 // TODO template
 async function name(req, res, next) {
     try {
 
     } catch (error) {
-        next(next);
+        next(error);
     }
 }
 
 export default {
     createOrder,
     updateOrder,
-    updateOrderStatus
+    updateOrderStatus,
+    deleteOrder
 }
