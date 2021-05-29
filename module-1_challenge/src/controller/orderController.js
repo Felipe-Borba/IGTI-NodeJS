@@ -126,6 +126,18 @@ async function deleteOrder(req, res, next) {
     }
 }
 
+async function getOrder(req, res, next) {
+    try {
+        const inputData = {
+            id: parseInt(req.params.id)
+        }
+        res.send(await orderService.getOrderById(inputData));
+    } catch (error) {
+        next(error);
+    }
+}
+
+
 // TODO template
 async function name(req, res, next) {
     try {
@@ -139,5 +151,6 @@ export default {
     createOrder,
     updateOrder,
     updateOrderStatus,
-    deleteOrder
+    deleteOrder,
+    getOrder
 }

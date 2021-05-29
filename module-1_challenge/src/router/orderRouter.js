@@ -8,6 +8,7 @@ orderRouter.post('/', orderController.createOrder);
 orderRouter.put('/', orderController.updateOrder);
 orderRouter.patch('/', orderController.updateOrderStatus);
 orderRouter.delete('/', orderController.deleteOrder);
+orderRouter.get('/:id', orderController.getOrder);
 
 orderRouter.use((error, req, res, next) => {
     console.log(error);

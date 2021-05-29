@@ -24,9 +24,14 @@ async function deleteOrder(params) {
     return await orderRepository.deleteOrder(params.id);
 }
 
+async function getOrderById(params) {
+    return await orderRepository.getOrderById(params.id);
+}
+
 export default {
     createOrder,
     updateOrder,
     updateStatus,
-    deleteOrder
+    deleteOrder,
+    getOrderById
 }

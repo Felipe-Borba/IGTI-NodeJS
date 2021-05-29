@@ -56,9 +56,21 @@ async function deleteOrder(id) {
     await writeFile(fileName, JSON.stringify(data, null, 2));
 }
 
+async function getOrderById(id) {
+    const data = JSON.parse(await readFile(fileName));
+    const index = data.pedidos.findIndex(obj => obj.id == id);
+
+    if (index === -1) {
+        throw new Error(`order not found`);
+    }
+
+    return data.pedidos[index];
+}
+
 export default {
     insertItem,
     updateItem,
     updateEntregue,
-    deleteOrder
+    deleteOrder,
+    getOrderById
 }
