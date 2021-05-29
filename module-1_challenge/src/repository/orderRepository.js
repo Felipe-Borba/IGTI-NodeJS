@@ -4,7 +4,6 @@ const { readFile, writeFile } = promises;
 const fileName = `asset/pedidos.json`;
 
 async function insertOrder(order) {
-    // TODO push in json
     const data = JSON.parse(await readFile(fileName));
 
     order = {
