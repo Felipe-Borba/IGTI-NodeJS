@@ -9,6 +9,7 @@ orderRouter.put('/', orderController.updateOrder);
 orderRouter.patch('/', orderController.updateOrderStatus);
 orderRouter.delete('/', orderController.deleteOrder);
 orderRouter.get('/:id', orderController.getOrder);
+orderRouter.get('/valor/cliente', orderController.totalValor);
 
 orderRouter.use((error, req, res, next) => {
     console.log(error);

@@ -28,10 +28,25 @@ async function getOrderById(params) {
     return await orderRepository.getOrderById(params.id);
 }
 
+async function getTotalValor(params) {
+    let total = 0;
+    let orderList = await orderRepository.getOrder();
+    
+    orderList = orderList.filter(order => order.cliente === params.cliente);
+    orderList = orderList.filter(order => order.entregue === true);
+
+    orderList.forEach(order => {
+     total += order.valor;   
+    });
+    
+    return total;
+}
+
 export default {
     createOrder,
     updateOrder,
     updateStatus,
     deleteOrder,
-    getOrderById
+    getOrderById,
+    getTotalValor
 }

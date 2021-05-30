@@ -42,7 +42,7 @@ async function updateEntregue(params) {
     if (index === -1) {
         throw new Error(`order not found`);
     }
-    
+
     data.pedidos[index].entregue = params.entregue;
 
     await writeFile(fileName, JSON.stringify(data, null, 2));
@@ -67,10 +67,16 @@ async function getOrderById(id) {
     return data.pedidos[index];
 }
 
+async function getOrder() {
+    const data = JSON.parse(await readFile(fileName));
+    return data.pedidos;
+}
+
 export default {
     insertItem,
     updateItem,
     updateEntregue,
     deleteOrder,
-    getOrderById
+    getOrderById,
+    getOrder
 }

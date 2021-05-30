@@ -109,7 +109,7 @@ async function deleteOrder(req, res, next) {
             id: req.body.id
         };
 
-        if (typeof (inputData.id) != 'number' ) {
+        if (typeof (inputData.id) != 'number') {
             throw new Error(`
                 input data should be:
                 {
@@ -117,7 +117,7 @@ async function deleteOrder(req, res, next) {
                 }
             `);
         }
-        
+
         await orderService.deleteOrder(inputData);
 
         res.end();
@@ -137,6 +137,26 @@ async function getOrder(req, res, next) {
     }
 }
 
+async function totalValor(req, res, next) {
+    try {
+        const inputData = {
+            cliente: req.body.cliente
+        }
+
+        if (typeof (inputData.cliente) != 'string') {
+            throw new Error(`
+                input data should be:
+                {
+                    cliente: string
+                }
+            `);
+        }
+
+        res.send({ total: await orderService.getTotalValor(inputData) });
+    } catch (error) {
+        next(error);
+    }
+}
 
 // TODO template
 async function name(req, res, next) {
@@ -152,5 +172,6 @@ export default {
     updateOrder,
     updateOrderStatus,
     deleteOrder,
-    getOrder
+    getOrder,
+    totalValor
 }
