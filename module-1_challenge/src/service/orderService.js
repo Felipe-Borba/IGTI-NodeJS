@@ -31,15 +31,25 @@ async function getOrderById(params) {
 async function getTotalValor(params) {
     let total = 0;
     let orderList = await orderRepository.getOrder();
-    
+
     orderList = orderList.filter(order => order.cliente === params.cliente);
     orderList = orderList.filter(order => order.entregue === true);
 
     orderList.forEach(order => {
-     total += order.valor;   
+        total += order.valor;
     });
-    
     return total;
+}
+
+async function getTotalProduto(params) {
+    let totalPedidos = 0;
+    let orderList = await orderRepository.getOrder();
+
+    orderList = orderList.filter(order => order.produto != params.produto);
+    orderList = orderList.filter(order => order.entregue === true);
+    orderList.forEach(order => totalPedidos++);
+
+    return totalPedidos;
 }
 
 export default {
@@ -48,5 +58,6 @@ export default {
     updateStatus,
     deleteOrder,
     getOrderById,
-    getTotalValor
+    getTotalValor,
+    getTotalProduto
 }

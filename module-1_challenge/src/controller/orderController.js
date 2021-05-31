@@ -158,6 +158,28 @@ async function totalValor(req, res, next) {
     }
 }
 
+
+async function getTotalPedido(req, res, next) {
+    try {
+        const inputData = {
+            produto: req.body.produto
+        }
+        
+        if (typeof (inputData.produto) != 'string') {
+            throw new Error(`
+                input data should be:
+                {
+                    produto: string
+                }
+            `);
+        }
+
+        res.send({total: await orderService.getTotalProduto(inputData)});
+    } catch (error) {
+        next(error);
+    }
+}
+
 // TODO template
 async function name(req, res, next) {
     try {
@@ -173,5 +195,6 @@ export default {
     updateOrderStatus,
     deleteOrder,
     getOrder,
-    totalValor
+    totalValor,
+    getTotalPedido
 }
