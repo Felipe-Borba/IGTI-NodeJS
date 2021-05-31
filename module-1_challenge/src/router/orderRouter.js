@@ -11,6 +11,7 @@ orderRouter.delete('/', orderController.deleteOrder);
 orderRouter.get('/:id', orderController.getOrder);
 orderRouter.get('/valor/cliente', orderController.totalValor);
 orderRouter.get('/total/pedido', orderController.getTotalPedido);
+orderRouter.get('/mais/vendido', orderController.maisVendido);
 
 orderRouter.use((error, req, res, next) => {
     console.log(error);

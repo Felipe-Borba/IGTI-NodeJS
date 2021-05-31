@@ -1,7 +1,7 @@
 import { promises } from 'fs';
 
 const { readFile, writeFile } = promises;
-const fileName = `asset/pedidos.json`;
+const fileName = `./asset/pedidos.json`;
 
 async function insertItem(item) {
     const data = JSON.parse(await readFile(fileName));
@@ -72,11 +72,35 @@ async function getOrder() {
     return data.pedidos;
 }
 
+async function ListMaisVendido() {
+    let orderList = await getOrder();
+    orderList = orderList.filter(order => order.entregue != false);
+    const produtoList = [{
+        produto: orderList[0].produto,
+        quantidade: 0
+    }];
+
+    orderList.forEach(order => {
+        const index = produtoList.findIndex(item => item.produto === order.produto);
+        if (index === -1) {
+            produtoList.push({
+                produto: order.produto,
+                quantidade: 1
+            });
+        } else {
+            produtoList[index].quantidade++;
+        }
+    });
+
+    return produtoList;
+}
+
 export default {
     insertItem,
     updateItem,
     updateEntregue,
     deleteOrder,
     getOrderById,
-    getOrder
+    getOrder,
+    ListMaisVendido
 }

@@ -52,6 +52,16 @@ async function getTotalProduto(params) {
     return totalPedidos;
 }
 
+async function listMaisVendido() {
+    const produtoList = await orderRepository.ListMaisVendido();
+    const produtoArray = [];
+    produtoList.forEach(pedido => {
+        produtoArray.push(`${pedido.produto} - ${pedido.quantidade}`);
+    });
+    
+    return produtoArray
+}
+
 export default {
     createOrder,
     updateOrder,
@@ -59,5 +69,6 @@ export default {
     deleteOrder,
     getOrderById,
     getTotalValor,
-    getTotalProduto
+    getTotalProduto,
+    listMaisVendido
 }

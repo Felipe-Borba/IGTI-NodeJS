@@ -164,7 +164,7 @@ async function getTotalPedido(req, res, next) {
         const inputData = {
             produto: req.body.produto
         }
-        
+
         if (typeof (inputData.produto) != 'string') {
             throw new Error(`
                 input data should be:
@@ -174,16 +174,15 @@ async function getTotalPedido(req, res, next) {
             `);
         }
 
-        res.send({total: await orderService.getTotalProduto(inputData)});
+        res.send({ total: await orderService.getTotalProduto(inputData) });
     } catch (error) {
         next(error);
     }
 }
 
-// TODO template
-async function name(req, res, next) {
+async function maisVendido(req, res, next) {
     try {
-
+        res.send(await orderService.listMaisVendido());
     } catch (error) {
         next(error);
     }
@@ -196,5 +195,6 @@ export default {
     deleteOrder,
     getOrder,
     totalValor,
-    getTotalPedido
+    getTotalPedido,
+    maisVendido
 }
