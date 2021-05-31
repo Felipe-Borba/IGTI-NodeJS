@@ -42,24 +42,21 @@ async function getTotalValor(params) {
 }
 
 async function getTotalProduto(params) {
-    let totalPedidos = 0;
+    let valorTotal = 0.0;
     let orderList = await orderRepository.getOrder();
 
-    orderList = orderList.filter(order => order.produto != params.produto);
+    orderList = orderList.filter(order => order.produto === params.produto);
     orderList = orderList.filter(order => order.entregue === true);
-    orderList.forEach(order => totalPedidos++);
+    orderList.forEach(order => valorTotal = valorTotal + order.valor);
 
-    return totalPedidos;
+    return valorTotal;
 }
 
 async function listMaisVendido() {
     const produtoList = await orderRepository.ListMaisVendido();
-    const produtoArray = [];
-    produtoList.forEach(pedido => {
-        produtoArray.push(`${pedido.produto} - ${pedido.quantidade}`);
-    });
-    
-    return produtoArray
+    produtoList.sort((a, b) => b.quantidade - a.quantidade);
+
+    return produtoList.map(pedido => `${pedido.produto} - ${pedido.quantidade}`);
 }
 
 export default {

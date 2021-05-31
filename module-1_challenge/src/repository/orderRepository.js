@@ -2,6 +2,7 @@ import { promises } from 'fs';
 
 const { readFile, writeFile } = promises;
 const fileName = `./asset/pedidos.json`;
+//const fileName = `module-1_challenge/asset/pedidos.json`; //TODO I way to fix file not found bud while debugging 
 
 async function insertItem(item) {
     const data = JSON.parse(await readFile(fileName));
