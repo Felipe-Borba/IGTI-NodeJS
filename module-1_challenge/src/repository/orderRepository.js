@@ -76,10 +76,7 @@ async function getOrder() {
 async function ListMaisVendido() {
     let orderList = await getOrder();
     orderList = orderList.filter(order => order.entregue != false);
-    const produtoList = [{
-        produto: orderList[0].produto,
-        quantidade: 0
-    }];
+    const produtoList = [];
 
     orderList.forEach(order => {
         const index = produtoList.findIndex(item => item.produto === order.produto);

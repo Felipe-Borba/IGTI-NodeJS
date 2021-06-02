@@ -45,9 +45,9 @@ async function getTotalProduto(params) {
     let valorTotal = 0.0;
     let orderList = await orderRepository.getOrder();
 
-    orderList = orderList.filter(order => order.produto === params.produto);
-    orderList = orderList.filter(order => order.entregue === true);
-    orderList.forEach(order => valorTotal = valorTotal + order.valor);
+    orderList = orderList.filter(order => order.produto === params.produto && order.entregue);
+    //orderList = orderList.filter(order => order.entregue === true);
+    orderList.forEach(order => valorTotal = valorTotal + order.valor); // also could use reduce
 
     return valorTotal;
 }
