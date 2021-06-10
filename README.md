@@ -8,7 +8,7 @@
 
 ---
 - [ ] [Module 2 - lesson](https://github.com/Felipe-Borba/IGTI-NodeJS/blob/main/course%20pack/Apostila%20%E2%80%93%20M%C3%B3dulo%202%20%E2%80%93%20Bootcamp%20Desenvolvedor(a)%20NodeJs.pdf) _(so far without code)_
-- [ ] [Module 2 - assignment](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-2_assignment)
+- [x] [Module 2 - assignment](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-2_assignment)
 - [ ] [Module 2 - challenge](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-2_challenge)
 
 ---
