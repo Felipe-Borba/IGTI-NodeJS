@@ -82,9 +82,9 @@ app.use(basicAuth({
     }
 }))
 
-app.use("/account", authorize('admin'), accountsRouter);
+app.use("/account", authorize('admin','role1'), accountsRouter);
 
-app.listen(3000, async () => {
+app.listen(8080, async () => {
     try {
         await readFile(global.fileName);
         logger.info("API Started!");
