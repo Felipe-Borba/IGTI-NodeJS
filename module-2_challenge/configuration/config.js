@@ -10,3 +10,4 @@ module.exports = {
         "callback_url": "http://localhost:3000/auth/facebook/callback"
     }
 }
+// in prod scenario it's better store in .env (environment variables file)
