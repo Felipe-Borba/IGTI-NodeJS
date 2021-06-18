@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken";
 
 const { readFile, writeFile } = fs;
 
-global.fileName = "accounts.json";
+global.fileName = "module-2_assignment/my-bank-api/accounts.json";
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({ level, message, label, timestamp }) => {
@@ -21,7 +21,9 @@ global.logger = winston.createLogger({
   level: "silly",
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: "my-bank-api.log" }),
+    new winston.transports.File({
+      filename: "module-2_assignment/my-bank-api/my-bank-api.log",
+    }),
   ],
   format: combine(label({ label: "my-bank-api" }), timestamp(), myFormat),
 });
@@ -35,7 +37,7 @@ app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 function authorize(...allowed) {
   const isAllowed = (role) => allowed.indexOf(role) > -1;
 
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const authHeader = req.headers[`authorization`];
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -43,8 +45,12 @@ function authorize(...allowed) {
     }
 
     const token = authHeader.substring(7, authHeader.length);
+    const publickey = await readFile(
+      "./module-2_assignment/my-bank-api/security/public.key",
+      "utf-8"
+    );
 
-    jwt.verify(token, "secretKey", (err, decoded) => {
+    jwt.verify(token, publickey, { algorithms: ["RS256"] }, (err, decoded) => {
       if (err) {
         res.status(401).send("Invalid JWT token");
       }

@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import fs from "fs";
 
 var users = {
   //mocked database
@@ -22,7 +23,7 @@ async function createUser(user) {
     role: user.role,
   };
 
-  return users;
+  return { username: user.username, ...users[user.username] };
 }
 
 function login(user) {
@@ -41,13 +42,19 @@ function login(user) {
     throw new Error("password incorrect");
   }
 
+  const privatekey = fs.readFileSync(
+    "./module-2_assignment/my-bank-api/security/private.key",
+    "utf-8"
+  );
+
   return jwt.sign(
     {
       role: databaseUser.role,
     },
-    "secretKey",
+    privatekey,
     {
       expiresIn: 300,
+      algorithm: "RS256",
     }
   );
 }
