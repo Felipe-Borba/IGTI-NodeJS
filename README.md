@@ -4,4 +4,4 @@ In this repository is supposed to have all code of IGTI nodejs bootcamp, as well
 
 ## module-2_assignment
 
-**encryption keys:** to make this code work properly create 2 files in folder "module-2_assignment/my-bank-api/security" called private.key and public.key and generate those keys using any RSA Key Generator.
+**encryption:** to make this code work properly generate the keys using any RSA Key Generator and save in "my-bank-api/security/private.key" and "my-bank-api/security/public.key"
