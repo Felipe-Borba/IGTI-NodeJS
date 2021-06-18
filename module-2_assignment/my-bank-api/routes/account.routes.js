@@ -10,9 +10,4 @@ router.delete("/:id", AccountController.deleteAccount);
 router.put("/", AccountController.updateAccount);
 router.patch("/updateBalance", AccountController.updateBalance);
 
-router.use((err, req, res, next) => {
-    logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);    
-    res.status(400).send({ error: err.message });    
-});
-
 export default router;
