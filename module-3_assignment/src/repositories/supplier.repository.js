@@ -46,7 +46,7 @@ async function getSupplier(id) {
       [id]
     );
 
-    return res.rows[0] ? res.rows[0] : "supplier not found :(";
+    return res.rows[0];
   } catch (error) {
     throw error;
   } finally {
