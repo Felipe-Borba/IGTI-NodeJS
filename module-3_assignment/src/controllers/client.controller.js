@@ -31,7 +31,32 @@ async function getClients(req, res, next) {
   }
 }
 
+async function getClient(req, res, next) {
+  try {
+    const id = req.params.id;
+
+    res.send(await clientService.getClient(id));
+    logger.info(`GET /client/${id}`);
+  } catch (error) {
+    next(error);
+  }
+}
+//
+
+async function deleteClient(req, res, next) {
+  try {
+    const id = req.params.id;
+
+    res.send(await clientService.deleteClient(id));
+    logger.info(`DELETE /client/${id}`);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createClient,
   getClients,
+  getClient,
+  deleteClient,
 };

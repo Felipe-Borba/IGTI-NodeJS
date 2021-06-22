@@ -40,6 +40,12 @@ async function getClient(id) {
   const connection = await elephantSQL.connect();
 
   try {
+    const res = await connection.query(
+      "SELECT * FROM clients WHERE client_id=$1",
+      [id]
+    );
+
+    return res.rows[0] ? res.rows[0] : "client not found :(";
   } catch (error) {
     throw error;
   } finally {
@@ -62,6 +68,16 @@ async function deleteClient(id) {
   const connection = await elephantSQL.connect();
 
   try {
+    const res = await connection.query(
+      "DELETE FROM clients WHERE client_id = $1",
+      [id]
+    );
+
+    if (res.rowCount < 1) {
+      throw new Error(`Error to delete client id = ${id}`);
+    }
+
+    return `client id=${id} deleted`;
   } catch (error) {
     throw error;
   } finally {
