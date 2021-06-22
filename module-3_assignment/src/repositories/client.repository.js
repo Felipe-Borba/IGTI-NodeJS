@@ -53,10 +53,24 @@ async function getClient(id) {
   }
 }
 
-async function updateClient(id) {
+async function updateClient(client) {
   const connection = await elephantSQL.connect();
 
   try {
+    const sql =
+      "UPDATE clients SET name=$1, cpf=$2, phone=$3, email=$4, address=$5 WHERE client_id=$6 RETURNING *";
+    const values = [
+      client.name,
+      client.cpf,
+      client.phone,
+      client.email,
+      client.address,
+      client.id,
+    ];
+
+    const response = await connection.query(sql, values);
+
+    return response.rows[0];
   } catch (error) {
     throw error;
   } finally {
