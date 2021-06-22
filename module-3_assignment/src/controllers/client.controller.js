@@ -22,6 +22,16 @@ async function createClient(req, res, next) {
   }
 }
 
+async function getClients(req, res, next) {
+  try {
+    res.send(await clientService.getClients());
+    logger.info("GET /client");
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createClient,
+  getClients,
 };
