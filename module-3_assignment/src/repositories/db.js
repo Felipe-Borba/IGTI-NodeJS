@@ -5,14 +5,14 @@ async function connect() {
     return global.connection.connect();
   }
 
-  const pool = new pg.pool({
+  const pool = new pg.Pool({
     connectionString:
       "postgres://obwrxdnl:n82rOxHh9I3P2ZU2xjmEobjBQE-KSSe7@tuffi.db.elephantsql.com/obwrxdnl",
   });
 
   global.connection = pool;
 
-  return pool.connect;
+  return pool.connect();
 }
 
 export default {
