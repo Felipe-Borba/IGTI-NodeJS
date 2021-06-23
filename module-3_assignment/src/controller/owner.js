@@ -60,7 +60,7 @@ async function getOwnerList(req, res, next) {
 
 async function getOwnerById(req, res, next) {
   try {
-    const owner_id = res.params.id;
+    const owner_id = req.params.id;
 
     res.send(await OwnerService.getOwnerById(owner_id));
 

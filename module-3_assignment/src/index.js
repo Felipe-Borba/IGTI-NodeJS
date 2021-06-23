@@ -28,7 +28,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/owner", OwnerRouter);
+app.use("/proprietario", OwnerRouter);
 app.use("/animal", AnimalRouter);
 
 app.use((err, req, res, _) => {
