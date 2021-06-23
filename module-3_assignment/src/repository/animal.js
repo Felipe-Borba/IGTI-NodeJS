@@ -87,11 +87,11 @@ async function getAnimalById(animal_id) {
   }
 }
 
-async function getAnimalListByOwner(animal_id) {
+async function getAnimalListByOwner(owner_id) {
   const connection = await elephantSQL.connect();
   try {
     const sql = "SELECT * FROM animais WHERE proprietario_id=$1";
-    const response = await connection.query(sql, [animal_id]);
+    const response = await connection.query(sql, [owner_id]);
 
     return response.rows;
   } catch (error) {
