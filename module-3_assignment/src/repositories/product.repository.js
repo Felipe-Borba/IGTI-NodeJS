@@ -46,7 +46,7 @@ async function getProduct(id) {
       [id]
     );
 
-    return res.rows[0] ? res.rows[0] : "product not found :(";
+    return res.rows[0];
   } catch (error) {
     throw error;
   } finally {

@@ -1,12 +1,8 @@
 import productRepository from "../repositories/product.repository.js";
-import supplierRepository from "../repositories/supplier.repository.js";
+import verify from "./asset/verify.js";
 
 async function createProduct(product) {
-  const supplier = await supplierRepository.getSupplier(product.supplier_id);
-
-  if (!supplier) {
-    throw new Error("supplier_id not found");
-  }
+  await verify.Supplier(product.supplier_id);
 
   return await productRepository.insertProduct(product);
 }
@@ -20,11 +16,7 @@ async function getProduct(id) {
 }
 
 async function updateProduct(product) {
-  const supplier = await supplierRepository.getSupplier(product.supplier_id);
-
-  if (!supplier) {
-    throw new Error("supplier_id not found");
-  }
+  await verify.Supplier(product.supplier_id);
 
   return await productRepository.updateProduct(product);
 }

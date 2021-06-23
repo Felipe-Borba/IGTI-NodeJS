@@ -45,7 +45,7 @@ async function getClient(id) {
       [id]
     );
 
-    return res.rows[0] ? res.rows[0] : "client not found :(";
+    return res.rows[0];
   } catch (error) {
     throw error;
   } finally {
