@@ -31,6 +31,23 @@ async function getSales() {
   }
 }
 
+async function getSaleByProductId(product_id) {
+  const connection = await elephantSQL.connect();
+
+  try {
+    const res = await connection.query(
+      "SELECT * FROM sales WHERE product_id=$1",
+      [product_id]
+    );
+
+    return res.rows;
+  } catch (error) {
+    throw error;
+  } finally {
+    connection.release();
+  }
+}
+
 async function getSale(id) {
   const connection = await elephantSQL.connect();
 
@@ -88,6 +105,7 @@ async function deleteSale(id) {
 export default {
   insertSale,
   getSales,
+  getSaleByProductId,
   getSale,
   updateSale,
   deleteSale,

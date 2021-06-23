@@ -15,7 +15,11 @@ async function createSale(sale) {
   return await saleRepository.insertSale(sale);
 }
 
-async function getSales() {
+async function getSales(productId) {
+  if (productId) {
+    return await saleRepository.getSaleByProductId(productId);
+  }
+
   return await saleRepository.getSales();
 }
 
