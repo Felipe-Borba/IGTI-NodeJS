@@ -10,7 +10,14 @@ async function updateOwner(owner) {
 }
 
 async function deleteOwner(owner_id) {
-  //TODO  verify if owner have a animal registered in his name, if so don't exclude
+  const petList = await AnimalRepository.getAnimalListByOwner(owner_id);
+
+  if (petList) {
+    throw new Error(
+      "can't delete owner with pet, first delete pet register of this owner"
+    );
+  }
+
   return await OwnerRepository.deleteOwner(owner_id);
 }
 
