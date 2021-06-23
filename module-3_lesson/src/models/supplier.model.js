@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import db from "../repositories/db";
+import db from "../repositories/db.js";
 
 const Supplier = db.define(
   "suppliers",
