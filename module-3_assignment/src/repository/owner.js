@@ -22,8 +22,8 @@ async function updateOwner(owner) {
   const connection = await elephantSQL.connect();
   try {
     const sql = `UPDATE proprietarios SET 
-                 name=$1, 
-                 phone=$2
+                 nome=$1, 
+                 telefone=$2
                  WHERE proprietario_id=$3
                  RETURNING *`;
     const params = [owner.name, owner.phone, owner.owner_id];
