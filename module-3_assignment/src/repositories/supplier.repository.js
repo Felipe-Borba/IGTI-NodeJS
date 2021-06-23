@@ -66,7 +66,7 @@ async function updateSupplier(supplier) {
       supplier.phone,
       supplier.email,
       supplier.address,
-      supplier.id,
+      supplier.supplier_id,
     ];
 
     const response = await connection.query(sql, values);

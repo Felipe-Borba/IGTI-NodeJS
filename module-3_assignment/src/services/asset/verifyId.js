@@ -8,6 +8,8 @@ async function Client(id) {
   if (!client) {
     throw new Error("client_id not found");
   }
+
+  return client;
 }
 
 async function Product(id) {
@@ -16,6 +18,8 @@ async function Product(id) {
   if (!product) {
     throw new Error("product_id not found");
   }
+
+  return product;
 }
 
 async function Supplier(id) {
@@ -24,6 +28,8 @@ async function Supplier(id) {
   if (!supplier) {
     throw new Error("supplier_id not found");
   }
+
+  return supplier;
 }
 
 export default {

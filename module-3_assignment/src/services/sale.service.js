@@ -1,9 +1,16 @@
 import saleRepository from "../repositories/sale.repository.js";
-import verify from "./asset/verify.js";
+import productRepository from "../repositories/product.repository.js";
+import verifyId from "./asset/verifyId.js";
 
 async function createSale(sale) {
-  await verify.Client(sale.client_id);
-  await verify.Product(sale.product_id);
+  await verifyId.Client(sale.client_id);
+  const product = await verifyId.Product(sale.product_id);
+
+  if (product.stock <= 0) {
+    throw new Error("product out of stock");
+  }
+  product.stock--;
+  await productRepository.updateProduct(product);
 
   return await saleRepository.insertSale(sale);
 }
@@ -17,8 +24,8 @@ async function getSale(id) {
 }
 
 async function updateSale(sale) {
-  await verify.Client(sale.client_id);
-  await verify.Product(sale.product_id);
+  await verifyId.Client(sale.client_id);
+  await verifyId.Product(sale.product_id);
 
   return await saleRepository.updateSale(sale);
 }

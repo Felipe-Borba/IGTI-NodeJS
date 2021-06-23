@@ -66,7 +66,7 @@ async function updateProduct(product) {
       product.value,
       product.stock,
       product.supplier_id,
-      product.id,
+      product.product_id,
     ];
 
     const response = await connection.query(sql, values);

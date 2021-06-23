@@ -3,7 +3,7 @@ import cors from "cors";
 import winston from "winston";
 
 import clientRouter from "./routes/client.route.js";
-import productRouter from "./routes/products.route.js";
+import productRouter from "./routes/product.route.js";
 import saleRouter from "./routes/sale.route.js";
 import supplierRouter from "./routes/supplier.route.js";
 

@@ -1,8 +1,8 @@
 import productRepository from "../repositories/product.repository.js";
-import verify from "./asset/verify.js";
+import verifyId from "./asset/verifyId.js";
 
 async function createProduct(product) {
-  await verify.Supplier(product.supplier_id);
+  await verifyId.Supplier(product.supplier_id);
 
   return await productRepository.insertProduct(product);
 }
@@ -16,7 +16,7 @@ async function getProduct(id) {
 }
 
 async function updateProduct(product) {
-  await verify.Supplier(product.supplier_id);
+  await verifyId.Supplier(product.supplier_id);
 
   return await productRepository.updateProduct(product);
 }

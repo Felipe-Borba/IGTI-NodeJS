@@ -65,7 +65,7 @@ async function updateClient(client) {
       client.phone,
       client.email,
       client.address,
-      client.id,
+      client.client_id,
     ];
 
     const response = await connection.query(sql, values);

@@ -57,10 +57,10 @@ async function updateProduct(req, res, next) {
       !product.value ||
       !product.stock ||
       !product.supplier_id ||
-      !product.id
+      !product.product_id
     ) {
       throw new Error(
-        "id, name, description, value, stock, supplier_id are missing"
+        "product_id, name, description, value, stock, supplier_id are missing"
       );
     }
 
