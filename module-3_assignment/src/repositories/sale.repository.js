@@ -52,14 +52,8 @@ async function updateSale(sale) {
 
   try {
     const sql =
-      "UPDATE sales SET value=$1, date=$2, client_id=$3, product_id=$4 WHERE sale_id=$5 RETURNING *";
-    const values = [
-      sale.value,
-      sale.date,
-      sale.client_id,
-      sale.product_id,
-      sale.sale_id,
-    ];
+      "UPDATE sales SET value=$1, date=$2, client_id=$3 WHERE sale_id=$4 RETURNING *";
+    const values = [sale.value, sale.date, sale.client_id, sale.sale_id];
 
     const response = await connection.query(sql, values);
 

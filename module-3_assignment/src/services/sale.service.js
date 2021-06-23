@@ -20,17 +20,27 @@ async function getSales() {
 }
 
 async function getSale(id) {
-  return await saleRepository.getSale(id);
+  const sale = await saleRepository.getSale(id);
+  if (!sale) {
+    throw new Error("sale id not found");
+  }
+  return sale;
 }
 
 async function updateSale(sale) {
   await verifyId.Client(sale.client_id);
-  await verifyId.Product(sale.product_id);
 
   return await saleRepository.updateSale(sale);
 }
 
 async function deleteSale(id) {
+  const sale = await getSale(id);
+  const product = await productRepository.getProduct(sale.product_id);
+
+  product.stock++;
+
+  await productRepository.updateProduct(product);
+
   return await saleRepository.deleteSale(id);
 }
 

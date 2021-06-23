@@ -43,16 +43,8 @@ async function updateSale(req, res, next) {
   try {
     let sale = req.body;
 
-    if (
-      !sale.value ||
-      !sale.date ||
-      !sale.client_id ||
-      !sale.product_id ||
-      !sale.sale_id
-    ) {
-      throw new Error(
-        "sale_id, value, date, client_id, product_id are missing"
-      );
+    if (!sale.value || !sale.date || !sale.client_id || !sale.sale_id) {
+      throw new Error("sale_id, value, date, client_id are missing");
     }
 
     sale = await saleService.updateSale(sale);
