@@ -87,7 +87,7 @@ async function getAnimalById(animal_id) {
   }
 }
 
-async function getAnimalListByAnimal(animal_id) {
+async function getAnimalListByOwner(animal_id) {
   const connection = await elephantSQL.connect();
   try {
     const sql = "SELECT * FROM animais WHERE proprietario_id=$1";
@@ -107,5 +107,5 @@ export default {
   deleteAnimal,
   getAnimalList,
   getAnimalById,
-  getAnimalListByAnimal,
+  getAnimalListByOwner,
 };
