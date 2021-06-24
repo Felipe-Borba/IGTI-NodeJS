@@ -21,7 +21,7 @@ const Sale = db.define(
       allowNull: false,
     },
   },
-  { underscore: true }
+  { underscored: true }
 );
 
 Sale.belongsTo(Product, { foreignKey: "productId" });

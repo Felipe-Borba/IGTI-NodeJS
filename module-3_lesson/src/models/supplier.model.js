@@ -31,7 +31,7 @@ const Supplier = db.define(
       allowNull: false,
     },
   },
-  { underscore: true }
+  { underscored: true }
 );
 
 export default Supplier;

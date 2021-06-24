@@ -1,9 +1,12 @@
 import Sequelize from "sequelize";
+import env from "dotenv";
+
+env.config();
 
 const sequelize = new Sequelize(process.env.URL, {
   dialect: "postgres",
   define: {
-    timestamp: false,
+    timestamps: false,
   },
 });
 
