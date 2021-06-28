@@ -85,10 +85,25 @@ async function deleteProduct(req, res, next) {
   }
 }
 
+async function createProductInfo(req, res, next) {
+  try {
+    let productInfo = req.body;
+    if (!productInfo.productId) {
+      throw new Error("productId, are missing");
+    }
+    productInfo = await productService.createProductInfo(productInfo);
+    res.send(productInfo);
+    logger.info(`POST /product/info - ${JSON.stringify(productInfo)}`);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createProduct,
   getProducts,
   getProduct,
   updateProduct,
   deleteProduct,
+  createProductInfo,
 };

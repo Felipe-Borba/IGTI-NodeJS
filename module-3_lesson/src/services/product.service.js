@@ -1,5 +1,6 @@
 import productRepository from "../repositories/product.repository.js";
 import saleRepository from "../repositories/sale.repository.js";
+import ProductInfoRepository from "../repositories/productInfo.repository.js";
 import verifyId from "./asset/verifyId.js";
 
 async function createProduct(product) {
@@ -31,10 +32,15 @@ async function deleteProduct(id) {
   return await productRepository.deleteProduct(id);
 }
 
+async function createProductInfo(productInfo) {
+  await ProductInfoRepository.createProductInfo(productInfo);
+}
+
 export default {
   createProduct,
   getProducts,
   getProduct,
   updateProduct,
   deleteProduct,
+  createProductInfo,
 };
