@@ -56,40 +56,34 @@ async function getSale(id) {
 }
 
 async function updateSale(sale) {
-  const connection = await elephantSQL.connect();
-
   try {
-    const sql =
-      "UPDATE sales SET value=$1, date=$2, client_id=$3 WHERE sale_id=$4 RETURNING *";
-    const values = [sale.value, sale.date, sale.client_id, sale.sale_id];
-
-    const response = await connection.query(sql, values);
-
-    return response.rows[0];
+    await Sale.update(
+      {
+        value: sale.value,
+        date: sale.date,
+        clientId: sale.clientId,
+      },
+      {
+        where: {
+          saleId: sale.saleId,
+        },
+      }
+    );
+    return await Sale.getSale(sale.saleId);
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 
 async function deleteSale(id) {
-  const connection = await elephantSQL.connect();
-
   try {
-    const res = await connection.query("DELETE FROM sales WHERE sale_id = $1", [
-      id,
-    ]);
-
-    if (res.rowCount < 1) {
-      throw new Error(`Error to delete sale id = ${id}`);
-    }
-
-    return `sale id=${id} deleted`;
+    return await Sale.destroy({
+      where: {
+        saleId: id,
+      },
+    });
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 

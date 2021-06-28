@@ -23,7 +23,8 @@ async function updateProduct(product) {
 }
 
 async function deleteProduct(id) {
-  if (await saleRepository.getSaleByProductId(id)) {
+  const sales = await saleRepository.getSaleByProductId(id);
+  if (sales.length > 0) {
     throw new Error("can't delete product with sales registered");
   }
 

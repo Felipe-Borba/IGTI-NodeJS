@@ -6,7 +6,7 @@ async function Client(id) {
   const client = await clientRepository.getClient(id);
 
   if (!client) {
-    throw new Error("client_id not found");
+    throw new Error("clientId not found");
   }
 
   return client;
