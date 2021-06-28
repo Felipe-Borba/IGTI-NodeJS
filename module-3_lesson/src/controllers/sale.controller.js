@@ -5,7 +5,7 @@ async function createSale(req, res, next) {
     let sale = req.body;
 
     if (!sale.value || !sale.date || !sale.clientId || !sale.productId) {
-      throw new Error("value, date, clientId, product_id are missing");
+      throw new Error("value, date, clientId, productId are missing");
     }
 
     sale = await saleService.createSale(sale);
@@ -19,7 +19,9 @@ async function createSale(req, res, next) {
 
 async function getSales(req, res, next) {
   try {
-    res.send(await saleService.getSales(req.query.productId));
+    res.send(
+      await saleService.getSales(req.query.productId, req.query.supplierId)
+    );
 
     logger.info("GET /sale");
   } catch (error) {

@@ -31,7 +31,7 @@ async function getSaleByProductId(productId) {
   try {
     return await Sale.findAll({
       where: {
-        productId: productId,
+        productId,
       },
       include: [
         {
@@ -39,6 +39,23 @@ async function getSaleByProductId(productId) {
         },
         {
           model: Client,
+        },
+      ],
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getSaleBySupplierId(supplierId) {
+  try {
+    return await Sale.findAll({
+      include: [
+        {
+          model: Product,
+          where: {
+            supplierId,
+          },
         },
       ],
     });
@@ -91,6 +108,7 @@ export default {
   insertSale,
   getSales,
   getSaleByProductId,
+  getSaleBySupplierId,
   getSale,
   updateSale,
   deleteSale,

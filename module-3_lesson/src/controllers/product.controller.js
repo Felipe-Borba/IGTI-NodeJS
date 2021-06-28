@@ -12,7 +12,7 @@ async function createProduct(req, res, next) {
       !product.supplierId
     ) {
       throw new Error(
-        "name, description, value, stock, supplier_id are missing"
+        "name, description, value, stock, supplierId are missing"
       );
     }
 

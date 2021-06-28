@@ -15,11 +15,13 @@ async function createSale(sale) {
   return await saleRepository.insertSale(sale);
 }
 
-async function getSales(productId) {
+async function getSales(productId, supplierId) {
   if (productId) {
     return await saleRepository.getSaleByProductId(productId);
   }
-
+  if (supplierId) {
+    return await saleRepository.getSaleBySupplierId(supplierId);
+  }
   return await saleRepository.getSales();
 }
 
