@@ -1,4 +1,5 @@
 import Product from "../models/product.model.js";
+import Supplier from "../models/supplier.model.js";
 
 async function insertProduct(product) {
   try {
@@ -18,7 +19,9 @@ async function getProducts() {
 
 async function getProduct(id) {
   try {
-    return await Product.findByPk(id);
+    return await Product.findByPk(id, {
+      raw: true,
+    });
   } catch (error) {
     throw error;
   }

@@ -1,6 +1,6 @@
 import productRepository from "../repositories/product.repository.js";
 import saleRepository from "../repositories/sale.repository.js";
-import ProductInfoRepository from "../repositories/productInfo.repository.js";
+import productInfoRepository from "../repositories/productInfo.repository.js";
 import verifyId from "./asset/verifyId.js";
 
 async function createProduct(product) {
@@ -14,7 +14,9 @@ async function getProducts() {
 }
 
 async function getProduct(id) {
-  return await productRepository.getProduct(id);
+  const product = await productRepository.getProduct(id);
+  product.info = await productInfoRepository.getProductInfo(parseInt(id));
+  return product;
 }
 
 async function updateProduct(product) {
@@ -33,7 +35,11 @@ async function deleteProduct(id) {
 }
 
 async function createProductInfo(productInfo) {
-  await ProductInfoRepository.createProductInfo(productInfo);
+  await productInfoRepository.createProductInfo(productInfo);
+}
+
+async function updateProductInfo(productInfo) {
+  await productInfoRepository.updateProductInfo(productInfo);
 }
 
 export default {
@@ -43,4 +49,5 @@ export default {
   updateProduct,
   deleteProduct,
   createProductInfo,
+  updateProductInfo,
 };
