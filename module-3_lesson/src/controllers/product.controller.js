@@ -136,7 +136,30 @@ async function deleteReview(req, res, next) {
     await productService.deleteReview(id, index);
 
     res.end();
-    logger.info(`DELETE ${id}/review/${index}`);
+    logger.info(`DELETE /product${id}/review/${index}`);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getProductsInfo(req, res, next) {
+  try {
+    res.send(await productService.getProductsInfo());
+
+    logger.info("GET /product/info");
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteProductInfo(req, res, next) {
+  try {
+    const id = req.params.id;
+
+    await productService.deleteProductInfo(id);
+
+    res.end();
+    logger.info(`DELETE /product/info/${id}`);
   } catch (error) {
     next(error);
   }
@@ -152,4 +175,6 @@ export default {
   updateProductInfo,
   createReview,
   deleteReview,
+  getProductsInfo,
+  deleteProductInfo,
 };

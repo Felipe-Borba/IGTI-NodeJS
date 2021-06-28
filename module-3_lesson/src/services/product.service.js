@@ -50,6 +50,14 @@ async function deleteReview(productId, index) {
   await productInfoRepository.deleteReview(productId, index);
 }
 
+async function getProductsInfo(productId, index) {
+  return await productInfoRepository.getProductsInfo();
+}
+
+async function deleteProductInfo(id) {
+  await productInfoRepository.deleteProductInfo(id);
+}
+
 export default {
   createProduct,
   getProducts,
@@ -60,4 +68,6 @@ export default {
   updateProductInfo,
   createReview,
   deleteReview,
+  getProductsInfo,
+  deleteProductInfo,
 };
