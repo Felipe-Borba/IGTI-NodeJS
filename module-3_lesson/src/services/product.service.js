@@ -15,7 +15,7 @@ async function getProducts() {
 
 async function getProduct(id) {
   const product = await productRepository.getProduct(id);
-  product.info = await productInfoRepository.getProductInfo(parseInt(id));
+  product.info = await productInfoRepository.getProductInfo(id);
   return product;
 }
 
@@ -42,6 +42,14 @@ async function updateProductInfo(productInfo) {
   await productInfoRepository.updateProductInfo(productInfo);
 }
 
+async function createReview(review, productId) {
+  await productInfoRepository.createReview(review, productId);
+}
+
+async function deleteReview(productId, index) {
+  await productInfoRepository.deleteReview(productId, index);
+}
+
 export default {
   createProduct,
   getProducts,
@@ -50,4 +58,6 @@ export default {
   deleteProduct,
   createProductInfo,
   updateProductInfo,
+  createReview,
+  deleteReview,
 };

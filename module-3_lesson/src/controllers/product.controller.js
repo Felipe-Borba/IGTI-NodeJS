@@ -113,6 +113,35 @@ async function updateProductInfo(req, res, next) {
   }
 }
 
+async function createReview(req, res, next) {
+  try {
+    const params = req.body;
+    if (!params.productId || !params.review) {
+      throw new Error("productId and review are missing");
+    }
+
+    await productService.createReview(params.review, params.productId);
+    res.end();
+    logger.info(`POST /product/review`);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteReview(req, res, next) {
+  try {
+    const index = req.params.index;
+    const id = req.params.id;
+
+    await productService.deleteReview(id, index);
+
+    res.end();
+    logger.info(`DELETE ${id}/review/${index}`);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createProduct,
   getProducts,
@@ -121,4 +150,6 @@ export default {
   deleteProduct,
   createProductInfo,
   updateProductInfo,
+  createReview,
+  deleteReview,
 };
