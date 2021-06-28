@@ -1,66 +1,57 @@
-import elephantSQL from "./db.js";
+import Sale from "../models/sale.model.js";
+import Product from "../models/product.model.js";
+import Client from "../models/client.model.js";
 
 async function insertSale(sale) {
-  const connection = await elephantSQL.connect();
-
   try {
-    const sql = `INSERT INTO sales (value, date, client_id, product_id) VALUES ($1, $2, $3, $4) RETURNING *`;
-    const values = [sale.value, sale.date, sale.client_id, sale.product_id];
-
-    const res = await connection.query(sql, values);
-
-    return res.rows[0];
+    return await Sale.create(sale);
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 
 async function getSales() {
-  const connection = await elephantSQL.connect();
-
   try {
-    const res = await connection.query("SELECT * FROM sales");
-
-    return res.rows;
+    return await Sale.findAll({
+      include: [
+        {
+          model: Product,
+        },
+        {
+          model: Client,
+        },
+      ],
+    });
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 
-async function getSaleByProductId(product_id) {
-  const connection = await elephantSQL.connect();
-
+async function getSaleByProductId(productId) {
   try {
-    const res = await connection.query(
-      "SELECT * FROM sales WHERE product_id=$1",
-      [product_id]
-    );
-
-    return res.rows;
+    return await Sale.findAll({
+      where: {
+        productId: productId,
+      },
+      include: [
+        {
+          model: Product,
+        },
+        {
+          model: Client,
+        },
+      ],
+    });
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 
 async function getSale(id) {
-  const connection = await elephantSQL.connect();
-
   try {
-    const res = await connection.query("SELECT * FROM sales WHERE sale_id=$1", [
-      id,
-    ]);
-
-    return res.rows[0];
+    return await Sale.findByPk(id); //to return nested table values use findOne({where:{id=id},include:[...]})?
   } catch (error) {
     throw error;
-  } finally {
-    connection.release();
   }
 }
 

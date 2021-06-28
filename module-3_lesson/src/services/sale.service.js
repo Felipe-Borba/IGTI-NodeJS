@@ -3,8 +3,8 @@ import productRepository from "../repositories/product.repository.js";
 import verifyId from "./asset/verifyId.js";
 
 async function createSale(sale) {
-  await verifyId.Client(sale.client_id);
-  const product = await verifyId.Product(sale.product_id);
+  await verifyId.Client(sale.clientId);
+  const product = await verifyId.Product(sale.productId);
 
   if (product.stock <= 0) {
     throw new Error("product out of stock");
@@ -32,14 +32,14 @@ async function getSale(id) {
 }
 
 async function updateSale(sale) {
-  await verifyId.Client(sale.client_id);
+  await verifyId.Client(sale.clientId);
 
   return await saleRepository.updateSale(sale);
 }
 
 async function deleteSale(id) {
   const sale = await getSale(id);
-  const product = await productRepository.getProduct(sale.product_id);
+  const product = await productRepository.getProduct(sale.productId);
 
   product.stock++;
 

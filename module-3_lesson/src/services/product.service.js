@@ -23,9 +23,9 @@ async function updateProduct(product) {
 }
 
 async function deleteProduct(id) {
-  // if (await saleRepository.getSaleByProductId(id)) {
-  //   throw new Error("can't delete product with sales registered");
-  // }
+  if (await saleRepository.getSaleByProductId(id)) {
+    throw new Error("can't delete product with sales registered");
+  }
 
   return await productRepository.deleteProduct(id);
 }
