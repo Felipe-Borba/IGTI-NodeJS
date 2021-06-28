@@ -55,10 +55,10 @@ async function updateSupplier(req, res, next) {
       !supplier.phone ||
       !supplier.email ||
       !supplier.address ||
-      !supplier.supplier_id
+      !supplier.supplierId
     ) {
       throw new Error(
-        "supplier_id, name, cnpj, phone, email, address are missing"
+        "supplierId, name, cnpj, phone, email, address are missing"
       );
     }
 

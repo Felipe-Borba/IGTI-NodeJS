@@ -16,7 +16,7 @@ async function Product(id) {
   const product = await productRepository.getProduct(id);
 
   if (!product) {
-    throw new Error("product_id not found");
+    throw new Error("productId not found");
   }
 
   return product;
@@ -26,7 +26,7 @@ async function Supplier(id) {
   const supplier = await supplierRepository.getSupplier(id);
 
   if (!supplier) {
-    throw new Error("supplier_id not found");
+    throw new Error("supplierId not found");
   }
 
   return supplier;

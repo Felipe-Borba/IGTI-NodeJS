@@ -55,11 +55,9 @@ async function updateClient(req, res, next) {
       !client.phone ||
       !client.email ||
       !client.address ||
-      !client.client_id
+      !client.clientId
     ) {
-      throw new Error(
-        "client_id, name, cpf, phone, email, address are missing"
-      );
+      throw new Error("clientId, name, cpf, phone, email, address are missing");
     }
 
     client = await clientService.updateClient(client);

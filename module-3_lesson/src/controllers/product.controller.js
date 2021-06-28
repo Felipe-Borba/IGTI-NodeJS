@@ -9,7 +9,7 @@ async function createProduct(req, res, next) {
       !product.description ||
       !product.value ||
       !product.stock ||
-      !product.supplier_id
+      !product.supplierId
     ) {
       throw new Error(
         "name, description, value, stock, supplier_id are missing"
@@ -56,11 +56,11 @@ async function updateProduct(req, res, next) {
       !product.description ||
       !product.value ||
       !product.stock ||
-      !product.supplier_id ||
-      !product.product_id
+      !product.supplierId ||
+      !product.productId
     ) {
       throw new Error(
-        "product_id, name, description, value, stock, supplier_id are missing"
+        "productId, name, description, value, stock, supplierId are missing"
       );
     }
 
