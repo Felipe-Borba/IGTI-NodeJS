@@ -1,84 +1,35 @@
-import elephantSQL from "./assets/db.js";
+import Owner from "../models/owner.js";
 
 async function createOwner(owner) {
-  const connection = await elephantSQL.connect();
-  try {
-    const sql = `INSERT INTO proprietarios (nome, telefone) 
-                 VALUES ($1, $2) 
-                 RETURNING *`;
-    const params = [owner.name, owner.phone];
-
-    const response = await connection.query(sql, params);
-
-    return response.rows[0];
-  } catch (error) {
-    throw error;
-  } finally {
-    connection.release();
-  }
+  return await Owner.create(owner);
 }
 
 async function updateOwner(owner) {
-  const connection = await elephantSQL.connect();
-  try {
-    const sql = `UPDATE proprietarios SET 
-                 nome=$1, 
-                 telefone=$2
-                 WHERE proprietario_id=$3
-                 RETURNING *`;
-    const params = [owner.name, owner.phone, owner.owner_id];
+  await Owner.update(owner, {
+    where: {
+      proprietarioId: owner.proprietarioId,
+    },
+  });
 
-    const response = await connection.query(sql, params);
-
-    return response.rows[0];
-  } catch (error) {
-    throw error;
-  } finally {
-    connection.release();
-  }
+  return await getOwnerById(owner.animalId);
 }
 
-async function deleteOwner(owner_id) {
-  const connection = await elephantSQL.connect();
-  try {
-    const sql = `DELETE FROM proprietarios WHERE proprietario_id=$1`;
+async function deleteOwner(proprietarioId) {
+  await Owner.destroy({
+    where: {
+      proprietarioId,
+    },
+  });
 
-    await connection.query(sql, [owner_id]);
-
-    return "ok";
-  } catch (error) {
-    throw error;
-  } finally {
-    connection.release();
-  }
+  return "ok";
 }
 
 async function getOwnerList() {
-  const connection = await elephantSQL.connect();
-  try {
-    const response = await connection.query("SELECT * FROM proprietarios");
-
-    return response.rows;
-  } catch (error) {
-    throw error;
-  } finally {
-    connection.release();
-  }
+  return await Owner.findAll();
 }
 
-async function getOwnerById(owner_id) {
-  const connection = await elephantSQL.connect();
-  try {
-    const sql = "SELECT * FROM proprietarios WHERE proprietario_id=$1";
-    const params = [owner_id];
-    const response = await connection.query(sql, params);
-
-    return response.rows;
-  } catch (error) {
-    throw error;
-  } finally {
-    connection.release();
-  }
+async function getOwnerById(proprietarioId) {
+  return await Owner.findByPk(proprietarioId);
 }
 
 export default {

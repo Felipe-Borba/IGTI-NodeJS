@@ -4,8 +4,8 @@ async function createOwner(req, res, next) {
   try {
     let owner = req.body;
 
-    if (!owner.name || !owner.phone) {
-      throw new Error("name and phone are missing");
+    if (!owner.nome || !owner.telefone) {
+      throw new Error("nome and telefone are missing");
     }
 
     owner = await OwnerService.createOwner(owner);
@@ -21,8 +21,8 @@ async function updateOwner(req, res, next) {
   try {
     let owner = req.body;
 
-    if (!owner.owner_id || !owner.name || !owner.phone) {
-      throw new Error("owner_id, name, phone are missing");
+    if (!owner.proprietarioId || !owner.nome || !owner.telefone) {
+      throw new Error("proprietarioId, nome, telefone are missing");
     }
 
     owner = await OwnerService.updateOwner(owner);
@@ -36,13 +36,13 @@ async function updateOwner(req, res, next) {
 
 async function deleteOwner(req, res, next) {
   try {
-    const owner_id = req.params.id;
+    const ownerId = req.params.id;
 
-    await OwnerService.deleteOwner(owner_id);
+    await OwnerService.deleteOwner(ownerId);
 
     res.end();
 
-    logger.info(`DELETE /owner/${owner_id}`);
+    logger.info(`DELETE /owner/${ownerId}`);
   } catch (error) {
     next(error);
   }
@@ -60,11 +60,11 @@ async function getOwnerList(req, res, next) {
 
 async function getOwnerById(req, res, next) {
   try {
-    const owner_id = req.params.id;
+    const ownerId = req.params.id;
 
-    res.send(await OwnerService.getOwnerById(owner_id));
+    res.send(await OwnerService.getOwnerById(ownerId));
 
-    logger.info(`get /owner/${owner_id}`);
+    logger.info(`get /owner/${ownerId}`);
   } catch (error) {
     next(error);
   }

@@ -4,8 +4,8 @@ async function createAnimal(req, res, next) {
   try {
     let animal = req.body;
 
-    if (!animal.name || !animal.specie || !animal.owner_id) {
-      throw new Error("name, specie, owner_id are missing");
+    if (!animal.nome || !animal.tipo || !animal.proprietarioId) {
+      throw new Error("nome, tipo, proprietarioId are missing");
     }
 
     animal = await AnimalService.createAnimal(animal);
@@ -22,12 +22,12 @@ async function updateAnimal(req, res, next) {
     let animal = req.body;
 
     if (
-      !animal.animal_id ||
-      !animal.name ||
-      !animal.specie ||
-      !animal.owner_id
+      !animal.animalId ||
+      !animal.nome ||
+      !animal.tipo ||
+      !animal.proprietarioId
     ) {
-      throw new Error("animal_id, name, specie, owner _id are missing");
+      throw new Error("animalId, nome, tipo, proprietarioId are missing");
     }
 
     animal = await AnimalService.updateAnimal(animal);
@@ -41,9 +41,9 @@ async function updateAnimal(req, res, next) {
 
 async function deleteAnimal(req, res, next) {
   try {
-    const animal_id = req.params.id;
+    const animalId = req.params.id;
 
-    await AnimalService.deleteAnimal(animal_id);
+    await AnimalService.deleteAnimal(animalId);
 
     res.end();
 
@@ -55,9 +55,9 @@ async function deleteAnimal(req, res, next) {
 
 async function getAnimalList(req, res, next) {
   try {
-    const owner_id = req.query.owner_id;
+    const ownerId = req.query.proprietarioId;
 
-    res.send(await AnimalService.getAnimalList(owner_id));
+    res.send(await AnimalService.getAnimalList(ownerId));
 
     logger.info(`GET /owner`);
   } catch (error) {
@@ -67,11 +67,11 @@ async function getAnimalList(req, res, next) {
 
 async function getAnimalById(req, res, next) {
   try {
-    const animal_id = req.params.id;
+    const animalId = req.params.id;
 
-    res.send(await AnimalService.getAnimalById(animal_id));
+    res.send(await AnimalService.getAnimalById(animalId));
 
-    logger.info(`GET /owner/${animal_id}`);
+    logger.info(`GET /owner/${animalId}`);
   } catch (error) {
     next(error);
   }

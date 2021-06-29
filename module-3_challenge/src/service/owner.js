@@ -9,24 +9,24 @@ async function updateOwner(owner) {
   return await OwnerRepository.updateOwner(owner);
 }
 
-async function deleteOwner(owner_id) {
-  const petList = await AnimalRepository.getAnimalListByOwner(owner_id);
+async function deleteOwner(ownerId) {
+  const petList = await AnimalRepository.getAnimalListByOwner(ownerId);
 
-  if (petList) {
+  if (petList.length < 0) {
     throw new Error(
       "can't delete owner with pet, first delete pet register of this owner"
     );
   }
 
-  return await OwnerRepository.deleteOwner(owner_id);
+  return await OwnerRepository.deleteOwner(ownerId);
 }
 
 async function getOwnerList() {
   return await OwnerRepository.getOwnerList();
 }
 
-async function getOwnerById(owner_id) {
-  return await OwnerRepository.getOwnerById(owner_id);
+async function getOwnerById(ownerId) {
+  return await OwnerRepository.getOwnerById(ownerId);
 }
 
 export default {
