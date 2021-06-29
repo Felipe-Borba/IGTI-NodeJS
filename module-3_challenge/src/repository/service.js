@@ -31,7 +31,18 @@ async function getServiceList() {
 }
 
 async function getServiceById(serviceId) {
-  return await Service.findByPk(serviceId);
+  return await Service.findByPk(serviceId, {
+    include: [
+      {
+        model: Animal,
+        include: [
+          {
+            model: Owner,
+          },
+        ],
+      },
+    ],
+  });
 }
 
 async function getServiceListByOwner(proprietarioId) {

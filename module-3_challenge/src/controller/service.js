@@ -27,7 +27,20 @@ async function getServiceList(req, res, next) {
   }
 }
 
+async function getServiceById(req, res, next) {
+  try {
+    const id = req.params.id;
+
+    res.send(await ServiceRepository.getServiceById(id));
+
+    logger.info(`GET /service/${id}`);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export default {
   createService,
   getServiceList,
+  getServiceById,
 };

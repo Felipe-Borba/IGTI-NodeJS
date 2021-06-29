@@ -12,7 +12,12 @@ async function getServiceList(filter) {
   return await ServiceRepository.getServiceList();
 }
 
+async function getServiceById(id) {
+  return await ServiceRepository.getServiceById(id);
+}
+
 export default {
   createService,
   getServiceList,
+  getServiceById,
 };
