@@ -3,7 +3,7 @@ import ReviewSchema from "./review.schema.js";
 
 const ProductInfoSchema = new mongoose.Schema(
   {
-    ProductId: Number,
+    productId: Number,
     category: String,
     height: String,
     depth: String,
