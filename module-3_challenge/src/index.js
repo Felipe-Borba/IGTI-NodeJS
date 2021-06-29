@@ -6,6 +6,7 @@ import env from "dotenv";
 import AnimalRouter from "./router/animal.js";
 import OwnerRouter from "./router/owner.js";
 import ServiceRouter from "./router/service.js";
+import HomeRouter from "./router/home.js";
 
 env.config();
 
@@ -29,6 +30,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/", HomeRouter);
 app.use("/proprietario", OwnerRouter);
 app.use("/animal", AnimalRouter);
 app.use("/service", ServiceRouter);

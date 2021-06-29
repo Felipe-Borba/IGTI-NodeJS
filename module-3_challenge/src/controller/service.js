@@ -10,7 +10,7 @@ async function createService(req, res, next) {
     service = await ServiceRepository.createService(service);
     res.send(service);
 
-    logger.info(`POST /service - ${service}`);
+    logger.info(`POST /service - ${JSON.stringify(service)}`);
   } catch (error) {
     next(error);
   }
