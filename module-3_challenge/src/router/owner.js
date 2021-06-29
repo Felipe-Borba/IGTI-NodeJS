@@ -1,5 +1,6 @@
 import express from "express";
 import OwnerController from "../controller/owner.js";
+
 const router = express.Router();
 
 router.post("/", OwnerController.createOwner);

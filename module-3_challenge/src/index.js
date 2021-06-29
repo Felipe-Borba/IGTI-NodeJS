@@ -5,6 +5,7 @@ import env from "dotenv";
 
 import AnimalRouter from "./router/animal.js";
 import OwnerRouter from "./router/owner.js";
+import ServiceRouter from "./router/service.js";
 
 env.config();
 
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/proprietario", OwnerRouter);
 app.use("/animal", AnimalRouter);
+app.use("/service", ServiceRouter);
 
 app.use((err, req, res, _) => {
   logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);

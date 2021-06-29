@@ -1,4 +1,6 @@
 import Service from "../models/service.js";
+import Animal from "../models/animal.js";
+import Owner from "../models/owner.js";
 
 async function createService(service) {
   return await Service.create(service);
@@ -32,10 +34,24 @@ async function getServiceById(serviceId) {
   return await Service.findByPk(serviceId);
 }
 
+async function getServiceListByOwner(proprietarioId) {
+  return await Service.findAll({
+    include: [
+      {
+        model: Animal,
+        where: {
+          proprietarioId,
+        },
+      },
+    ],
+  });
+}
+
 export default {
   createService,
   updateService,
   deleteService,
   getServiceList,
   getServiceById,
+  getServiceListByOwner,
 };

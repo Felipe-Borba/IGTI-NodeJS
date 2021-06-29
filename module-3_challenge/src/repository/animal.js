@@ -1,4 +1,5 @@
 import Animal from "../models/animal.js";
+import Owner from "../models/owner.js";
 
 async function createAnimal(animal) {
   return await Animal.create(animal);
@@ -25,11 +26,31 @@ async function deleteAnimal(animalId) {
 }
 
 async function getAnimalList() {
-  return await Animal.findAll();
+  return await Animal.findAll({
+    include: [
+      {
+        model: Owner,
+      },
+    ],
+  });
 }
 
 async function getAnimalById(animalId) {
-  return await Animal.findByPk(animalId);
+  // return await Animal.findOne({
+  //   where: { animalId },
+  //   include: [
+  //     {
+  //       model: Owner,
+  //     },
+  //   ],
+  // });
+  return await Animal.findByPk(animalId, {
+    include: [
+      {
+        model: Owner,
+      },
+    ],
+  });
 }
 
 async function getAnimalListByOwner(proprietarioId) {
@@ -37,6 +58,11 @@ async function getAnimalListByOwner(proprietarioId) {
     where: {
       proprietarioId,
     },
+    include: [
+      {
+        model: Owner,
+      },
+    ],
   });
 }
 
