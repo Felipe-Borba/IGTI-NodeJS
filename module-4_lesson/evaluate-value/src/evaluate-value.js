@@ -1,9 +1,16 @@
-function montante(capital, taxa, periodo) {
-  let montante = capital * Math.pow(1 + taxa, periodo - 1);
+function montante (capital, taxa, periodo) {
+  const montante = capital * Math.pow(1 + taxa, periodo - 1)
 
-  return montante;
+  return arredondar(montante)
+}
+
+function arredondar (number) {
+  const accurate = 100
+  const arredondando = Math.round(number * accurate) / 100
+  return arredondando
 }
 
 module.exports = {
   montante,
-};
+  arredondar
+}
