@@ -6,7 +6,7 @@ function montante (capital, taxa, periodo) {
 
 function arredondar (number) {
   const accurate = 100
-  const arredondando = Math.round(number * accurate) / 100
+  const arredondando = Math.round((number + Number.EPSILON) * accurate) / accurate
   return arredondando
 }
 

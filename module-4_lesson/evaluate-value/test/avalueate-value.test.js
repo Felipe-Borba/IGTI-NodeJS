@@ -26,7 +26,7 @@ describe('arredondar', () => {
   })
 
   test('1.005 deve retornar 1.01', () => {
-    const result = evaluate.arredondar(1.001)
+    const result = evaluate.arredondar(1.005)
 
     expect(result).toBe(1.01)
   })
