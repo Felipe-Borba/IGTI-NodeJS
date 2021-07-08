@@ -31,3 +31,50 @@ describe('arredondar', () => {
     expect(result).toBe(1.01)
   })
 })
+
+describe('calcularPrestacoes', () => {
+  test('o numero de parelas é igual ao numero de prestações', () => {
+    // Premissas
+    const numeroPrestacoes = 6
+
+    // Operação
+    const prestacoes = evaluate.calcularPrestacoes(200, numeroPrestacoes)
+
+    // Resultado esperado
+    expect(prestacoes.length).toBe(numeroPrestacoes)
+  })
+
+  test('Uma unica prestação, valor é igual ao montante', () => {
+    const numeroPrestacoes = 1
+
+    const prestacoes = evaluate.calcularPrestacoes(200, numeroPrestacoes)
+
+    expect(prestacoes.length).toBe(numeroPrestacoes)
+    expect(prestacoes[0]).toBe(200)
+  })
+
+  test('Duas prestações, valor é igual a metade do montante', () => {
+    const numeroPrestacoes = 2
+    const montante = 200
+
+    const prestacoes = evaluate.calcularPrestacoes(montante, numeroPrestacoes)
+
+    expect(prestacoes.length).toBe(numeroPrestacoes)
+    expect(prestacoes[0]).toBe(montante / 2)
+    expect(prestacoes[1]).toBe(montante / 2)
+  })
+
+  test('Valor da soma das prestações deve ser igual ao montente com duas casas decimais', () => {
+    // Dado (Given)
+    const numeroPrestacoes = 3
+    const montante = 100
+
+    // Quando (when)
+    const prestacoes = evaluate.calcularPrestacoes(montante, numeroPrestacoes)
+
+    // Então (then)
+    expect(prestacoes.length).toBe(numeroPrestacoes)
+    const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
+    expect(soma).toBe(montante)
+  })
+})
