@@ -64,7 +64,7 @@ describe('calcularPrestacoes', () => {
     expect(prestacoes[1]).toBe(montante / 2)
   })
 
-  test('Valor da soma das prestações deve ser igual ao montente com duas casas decimais', () => {
+  test.only('Valor da soma das prestações deve ser igual ao montente com duas casas decimais', () => {
     // Dado (Given)
     const numeroPrestacoes = 3
     const montante = 100
