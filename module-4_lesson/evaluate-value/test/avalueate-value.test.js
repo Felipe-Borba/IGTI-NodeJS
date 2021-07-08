@@ -20,9 +20,14 @@ describe('calcular montante', () => {
 
 describe('arredondar', () => {
   test('Arrendondar em duas casas decimais', () => {
-    const number = 538.4453124999998
-    const result = evaluate.arredondar(number)
+    const result = evaluate.arredondar(538.4453124999998)
 
     expect(result).toBe(538.45)
+  })
+
+  test('1.005 deve retornar 1.01', () => {
+    const result = evaluate.arredondar(1.001)
+
+    expect(result).toBe(1.01)
   })
 })
