@@ -1,5 +1,6 @@
 const evaluate = require('../src/evaluate-value')
 const get = require('./asset')
+require('./extensoes')
 
 describe('calcular montante', () => {
   test('Com uma prestação o montante é igual ao capital', () => {
@@ -74,17 +75,19 @@ describe('calcularPrestacoes', () => {
 
     // Então (then)
     expect(prestacoes.length).toBe(numeroPrestacoes)
-    const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
-    expect(soma).toBe(montante)
+    // const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
+    // expect(soma).toBe(evaluate.arredondar(montante))
+    expect(prestacoes).terSomaDeValoresIgual(montante)
 
-    for (let i = 0; i < prestacoes.length - 1; i++) {
-      const j = i + 1
+    // for (let i = 0; i < prestacoes.length - 1; i++) {
+    //   const j = i + 1
 
-      expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
-    }
+    //   expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
+    // }
+    expect(prestacoes).sejaDecrescente()
   })
 
-  test('Valor da soma das prestações deve ser igual ao montente com duas casas decimais (montante diferetne)', () => {
+  test('Valor da soma das prestações deve ser igual ao montente com duas casas decimais (montante diferente)', () => {
     // Dado (Given)
     const numeroPrestacoes = 3
     const montante = 101.994
@@ -94,13 +97,19 @@ describe('calcularPrestacoes', () => {
 
     // Então (then)
     expect(prestacoes.length).toBe(numeroPrestacoes)
-    const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
-    expect(soma).toBe(evaluate.arredondar(montante))
+    // const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
+    // expect(soma).toBe(evaluate.arredondar(montante))
+    expect(prestacoes).terSomaDeValoresIgual(montante)
 
-    for (let i = 0; i < prestacoes.length - 1; i++) {
-      const j = i + 1
+    // for (let i = 0; i < prestacoes.length - 1; i++) {
+    //   const j = i + 1
 
-      expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
-    }
+    //   expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
+    // }
+    expect(prestacoes).sejaDecrescente()
+
+    // test
+    const array = [1, 2, 3, 4]
+    expect(array).not.sejaDecrescente()
   })
 })
