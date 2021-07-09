@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "jest --coverage",
+    "start": "node src/server.js",
+    "test": "jest",
+    "cover": "jest --coverage",
     "lint": "eslint src/** test/** --fix",
     "watch": "jest --watch"
   },
