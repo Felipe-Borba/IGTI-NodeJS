@@ -2,7 +2,7 @@
   "name": "evaluate-value",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint src/** test/** --fix",
