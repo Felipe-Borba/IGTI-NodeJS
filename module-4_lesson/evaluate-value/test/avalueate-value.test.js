@@ -83,4 +83,24 @@ describe('calcularPrestacoes', () => {
       expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
     }
   })
+
+  test('Valor da soma das prestações deve ser igual ao montente com duas casas decimais (montante diferetne)', () => {
+    // Dado (Given)
+    const numeroPrestacoes = 3
+    const montante = 101.994
+
+    // Quando (when)
+    const prestacoes = evaluate.calcularPrestacoes(montante, numeroPrestacoes)
+
+    // Então (then)
+    expect(prestacoes.length).toBe(numeroPrestacoes)
+    const soma = evaluate.arredondar(prestacoes[0] + prestacoes[1] + prestacoes[2])
+    expect(soma).toBe(evaluate.arredondar(montante))
+
+    for (let i = 0; i < prestacoes.length - 1; i++) {
+      const j = i + 1
+
+      expect(prestacoes[i]).toBeGreaterThanOrEqual(prestacoes[j])
+    }
+  })
 })
