@@ -43,7 +43,7 @@ const amortizationModel = (sequelize, DataTypes) => {
       allowNull: false
     },
     Montante: {
-      types: DataTypes.DOUBLE,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     Prestacoes: {

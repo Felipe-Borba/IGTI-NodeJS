@@ -1,8 +1,8 @@
 const app = require('./app')
 const db = require('./db')
 
-db.sequelize.sync().then(() => {
-  console.log('Connected in database')
+db.sequelize.sync().then(async () => {
+  await console.log('Connected in database')
 })
 
 app.listen(8080, () => {

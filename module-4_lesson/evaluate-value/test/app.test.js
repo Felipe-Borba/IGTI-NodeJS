@@ -11,7 +11,7 @@ describe(('Integration test'), () => {
   afterAll(async () => await db.sequelize.close())
 
   const clientJoe = {
-    nome: 'Joe',
+    Nome: 'Joe',
     CPF: '000.000.000-00'
   }
 
@@ -24,10 +24,10 @@ describe(('Integration test'), () => {
   }
 
   const payloadRequest = {
-    nome: clientJoe.nome,
+    Nome: clientJoe.Nome,
     CPF: clientJoe.CPF,
-    valor: 101.75,
-    parcelas: 3
+    Valor: 101.75,
+    Parcelas: 3
   }
 
   test('should response http 200 on root path', () => {
@@ -41,9 +41,23 @@ describe(('Integration test'), () => {
     expect(res.status).toBe(200)
   })
 
-  // test('cenario 1', () => {
+  test('cenario 1', async () => {
+    const res = await request(app)
+      .post('/consulta-credito')
+      .send(payloadRequest)
 
-  // })
+    expect(res.body.erro).toBeUndefined()
+    expect(res.body.montante).toBe(106.9)
+    expect(res.status).toBe(201)
+    expect(res.body).toMatchSnapshot(resultadoEsperado)
+    expect(res.body).toMatchObject(resultadoEsperado)
+
+    const client = await db.client.findOne({ where: { CPF: clientJoe.CPF } })
+    expect(client.CPF).toBe(clientJoe.CPF)
+
+    const consulta = await db.amortization.findOne({ where: { ClientCPF: clientJoe.CPF } })
+    expect(consulta.Valor).toBe(101.75)
+  })
 
   test('cenario 2', async () => {
     db.client.create(clientJoe)
@@ -62,20 +76,20 @@ describe(('Integration test'), () => {
       .send(payloadRequest)
 
     expect(res.body).toMatchSnapshot(resultadoEsperado)
-    expect(res.status).toBe(200)
+    expect(res.status).toBe(201)
 
     const count = await db.amortization.count({ where: { ClientCPF: clientJoe.CPF } })
-    expect(count).toB(2)
+    expect(count).toBe(2)
   })
 
   test('cenario 3', async () => {
-    const res1 = await request('app')
+    const res1 = await request(app)
       .post('/consulta-credito')
       .send(payloadRequest)
 
     expect(res1.body).toMatchSnapshot(resultadoEsperado)
 
-    const res2 = await request('app')
+    const res2 = await request(app)
       .post('/consulta-credito')
       .send(payloadRequest)
 

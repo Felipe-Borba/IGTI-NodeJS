@@ -10,7 +10,7 @@ const consultar = async (nome, CPF, valor, parcelas) => {
 
   if (client == null) {
     client = await db.client.create({
-      Name: nome,
+      Nome: nome,
       CPF: CPF
     })
   }
@@ -31,7 +31,7 @@ const consultar = async (nome, CPF, valor, parcelas) => {
     }
   }
 
-  const montante = calculaValor.calcularMontante(valor, interest, parcelas)
+  const montante = calculaValor.montante(valor, interest, parcelas)
   const prestacoes = calculaValor.calcularPrestacoes(montante, parcelas)
 
   const novaConsulta = {
