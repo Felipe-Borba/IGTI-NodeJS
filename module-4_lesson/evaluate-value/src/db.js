@@ -18,7 +18,7 @@ const clientModel = (sequelize, DataTypes) => {
       primaryKey: true,
       unique: true
     },
-    Name: {
+    Nome: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
