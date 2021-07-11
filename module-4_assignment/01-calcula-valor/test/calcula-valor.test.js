@@ -89,4 +89,29 @@ describe('calcularPrestacoes', () => {
     expect(prestacoes).tenhaSomaDeValoresIgual(montante)
     expect(prestacoes).sejaDecrescente()
   })
+
+  test('montante menor que zero, deve retornar um array vazio', () => {
+    // Given
+    const numeroPrestacoes = 3
+    const montante = -101.994
+
+    // when
+    const prestacoes = calculaValor.calcularPrestacoes(montante, numeroPrestacoes)
+
+    // then
+    // console.log(prestacoes)
+    expect(prestacoes.length).toBe(0)
+  })
+
+  test('numeroParcelas menos que zero, deve retornar um array vazio', () => {
+    // Given
+    const numeroPrestacoes = -3
+    const montante = 101.994
+
+    // when
+    const prestacoes = calculaValor.calcularPrestacoes(montante, numeroPrestacoes)
+
+    // then
+    expect(prestacoes.length).toBe(0)
+  })
 })
