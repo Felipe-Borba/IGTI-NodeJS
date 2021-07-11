@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const db = require('./db')
 
 const { check, validationResult } = require('express-validator')
 
@@ -9,6 +10,16 @@ app.use(express.json())
 
 app.get('/', async (req, res) => {
   res.status(200).send('Bootcamp desenvolvedor back end - Tópicos especiais!')
+})
+
+app.get('/client', async (req, res) => {
+  try {
+    const response = await db.cliente.findAll()
+
+    return res.status(200).json(response)
+  } catch (error) {
+    return res.status(400).json({ erro: 'Something gone wrong' })
+  }
 })
 
 app.post('/consulta-credito',

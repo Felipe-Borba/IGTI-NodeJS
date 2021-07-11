@@ -102,4 +102,14 @@ describe('Testes de Integração', () => {
     expect(res.body.erro).toBeDefined()
     expect(res.status).toBe(400)
   })
+
+  test('when call get client, should return a list of client in database', async () => {
+    await db.cliente.create(clienteJoao)
+
+    const res = await request(app).get('/client')
+
+    // console.log(res.status, res.body)
+    expect(res.body.length).toBe(1)
+    expect(res.body[0]).toMatchSnapshot(clienteJoao)
+  })
 })
