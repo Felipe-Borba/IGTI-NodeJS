@@ -1,0 +1,19 @@
+version: '3'
+services: 
+  nodejs:
+    image: igti-node-app
+    restart: always
+    build: .
+    ports: 
+      - 8080
+    depends_on: 
+      - db
+  db:
+    image: postgres
+    restart: always
+    volumes: 
+      - /var/lib/docker/volumes/edeea6c56fc0b2dc6e8bc657c43fe5539cdbff9a9d78a8cb2ff0e1031d0fcbe1/_data
+    ports:
+      - 5432
+    environment: 
+      - POSTGRES_PASSWORD=mysecretpassword
