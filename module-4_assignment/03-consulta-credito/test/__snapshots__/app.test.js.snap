@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testes de Integração CENÁRIO 01 1`] = `
+Object {
+  "juros": 0.025,
+  "montante": 106.9,
+  "parcelas": 3,
+  "prestacoes": Array [
+    35.64,
+    35.63,
+    35.63,
+  ],
+  "primeiraPrestacao": 35.64,
+}
+`;
+
+exports[`Testes de Integração CENÁRIO 02 1`] = `
+Object {
+  "juros": 0.025,
+  "montante": 106.9,
+  "parcelas": 3,
+  "prestacoes": Array [
+    35.64,
+    35.63,
+    35.63,
+  ],
+  "primeiraPrestacao": 35.64,
+}
+`;
+
+exports[`Testes de Integração CENÁRIO 03 1`] = `
+Object {
+  "juros": 0.025,
+  "montante": 106.9,
+  "parcelas": 3,
+  "prestacoes": Array [
+    35.64,
+    35.63,
+    35.63,
+  ],
+  "primeiraPrestacao": 35.64,
+}
+`;
+
+exports[`Testes de Integração when call get client, should return a list of client in database 1`] = `
+Object {
+  "CPF": "000.000.000-00",
+  "Nome": "João Silva",
+  "createdAt": "2021-07-11T14:30:28.859Z",
+  "updatedAt": "2021-07-11T14:30:28.859Z",
+}
+`;
