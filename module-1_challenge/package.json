@@ -1,0 +1,17 @@
+{
+  "name": "delivery-api",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Felipe Borba",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

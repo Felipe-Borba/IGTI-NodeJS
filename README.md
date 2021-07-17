@@ -16,9 +16,9 @@ In this repository is supposed to have all code of IGTI nodejs bootcamp, as well
 
 ---
 
-- [ ] [Module 3 - lesson](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_lesson)
-- [ ] [Module 3 - assignment](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_assignment)
-- [ ] [Module 3 - challenge](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_challenge)
+- [x] [Module 3 - lesson](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_lesson)
+- [x] [Module 3 - assignment](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_assignment)
+- [x] [Module 3 - challenge](https://github.com/Felipe-Borba/IGTI-NodeJS/tree/module-3_challenge)
 
 ---
 
