@@ -11,8 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\module-1_lesson\\2-1\\index.js",
-            "args": ["10"]
+            "program": "${workspaceFolder}\\module-1_challenge\\src\\index.js"
         }
     ]
 }
