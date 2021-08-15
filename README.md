@@ -28,6 +28,6 @@ In this repository is supposed to have all code of IGTI nodejs bootcamp, as well
 
 ---
 
-- [ ] [Final - challenge]()
+- [x] [Final - challenge](https://github.com/Felipe-Borba/bookstore-api)
 
 ---
